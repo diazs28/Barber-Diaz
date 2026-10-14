@@ -1,6 +1,6 @@
 // Plano 2D del local: pinta el estado de cada silla (lámpara, cliente en la silla, rótulo) y avisa
 // cuando alguien elige un puesto. El dibujo es SVG decorativo; los puestos son <button> reales encima.
-import { BARBEROS } from './config.js';
+import { BARBEROS, nombreBarbero } from './config.js';
 import { diaRelativo, fechaDe, formatearHora } from './tiempo.js';
 
 const ESTADO_CORTO = {
@@ -66,7 +66,7 @@ export function pintarPlano(estados, error) {
     const detalle = (error ? ESTADO_CORTO.error : detalleEstado(estado, ahora)).replace(/\.$/, '');
     boton.setAttribute(
       'aria-label',
-      `${b.silla} ${b.nombre} “${b.apodo}”, silla ${b.silla}: ${detalle}. Ver horarios y reservar`,
+      `${b.silla} ${nombreBarbero(b)}, silla ${b.silla}: ${detalle}. Ver horarios y reservar`,
     );
   });
 }

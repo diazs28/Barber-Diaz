@@ -45,48 +45,47 @@ export const SERVICIOS = [
 ];
 
 // La silla corresponde al puesto del plano (ver index.html, data-silla).
-// descansa: días sin turno (0 = domingo). almuerzo: pausa diaria.
-// calendarioId: ID del Google Calendar del barbero (solo con AGENDA.fuente = 'google').
-// TODO cliente: nombres, apodos, especialidades y turnos reales.
+// apodo: opcional ('' = sin apodo). descansa: días sin turno (0 = domingo). almuerzo: pausa diaria.
+// El calendario de Google de cada barbero se configura en el servidor: api/_calendarios.js (mismo id).
+// TODO cliente: nombres, especialidades y turnos reales.
 export const BARBEROS = [
   {
-    id: 'andres',
+    id: 'alexander',
     silla: 1,
-    nombre: 'Andrés',
-    apodo: 'El Don',
-    especialidad: 'Cortes clásicos y a tijera',
+    nombre: 'Alexander',
+    apodo: '',
+    especialidad: 'Cortes clásicos y a tijera', // TODO cliente
     descansa: [1],
     almuerzo: ['12:00', '13:00'],
-    calendarioId: '',
   },
   {
-    id: 'camilo',
+    id: 'david',
     silla: 2,
-    nombre: 'Camilo',
-    apodo: 'Navaja',
-    especialidad: 'Barba, perfilado y afeitado con navaja',
+    nombre: 'David',
+    apodo: '',
+    especialidad: 'Barba, perfilado y afeitado con navaja', // TODO cliente
     descansa: [2],
     almuerzo: ['13:00', '14:00'],
-    calendarioId: '',
   },
   {
-    id: 'julian',
+    id: 'x',
     silla: 3,
-    nombre: 'Julián',
-    apodo: 'El Capo',
-    especialidad: 'Fade, degradados y diseños',
+    nombre: 'X', // TODO cliente: nombre real del barbero de la silla 3
+    apodo: '',
+    especialidad: 'Fade, degradados y diseños', // TODO cliente
     descansa: [0],
     almuerzo: ['14:00', '15:00'],
-    calendarioId: '',
   },
 ];
 
+// "Andrés “El Don”" o solo "Andrés" si no tiene apodo
+export const nombreBarbero = (b) => (b.apodo ? `${b.nombre} “${b.apodo}”` : b.nombre);
+
 export const AGENDA = {
   // 'demo': ocupación de ejemplo (siempre la misma para cada día).
-  // 'google': lee los bloques ocupados de cada calendarioId con la API free/busy de Google Calendar.
-  fuente: 'demo',
-  // Clave de navegador de Google Cloud, restringida a este dominio y solo a Calendar API (ver README).
-  googleApiKey: '',
+  // 'google': pide los bloques ocupados a /api/disponibilidad, que consulta Google Calendar en el
+  // servidor. La clave de Google vive en una variable de entorno, nunca en esta página.
+  fuente: 'google',
   diasVisibles: 7,
   intervaloMin: 30, // Cada cuánto empieza un turno
   anticipacionMin: 60, // No se reserva con menos de esta antelación

@@ -107,39 +107,18 @@ function ocupacionDemo(barbero, fecha) {
 }
 
 async function ocupacionGoogle(desde, dias) {
-  const sinCalendario = BARBEROS.filter((b) => !b.calendarioId).map((b) => b.nombre);
-  if (!AGENDA.googleApiKey || sinCalendario.length) {
+  const respuesta = await fetch(`/api/disponibilidad?desde=${desde}&dias=${dias}`);
+  const datos = await respuesta.json().catch(() => ({}));
+  if (!respuesta.ok) {
     throw new Error(
-      `Falta configurar Google Calendar: ${AGENDA.googleApiKey ? '' : 'googleApiKey; '}calendarioId de ${sinCalendario.join(', ') || 'nadie'}`,
+      `La agenda respondió ${respuesta.status}: ${datos.error?.code ?? 'sin código'}`,
     );
   }
-  const respuesta = await fetch(
-    `https://www.googleapis.com/calendar/v3/freeBusy?key=${encodeURIComponent(AGENDA.googleApiKey)}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        timeMin: instante(desde, '00:00').toISOString(),
-        timeMax: instante(sumarDias(desde, dias), '00:00').toISOString(),
-        timeZone: 'America/Bogota',
-        items: BARBEROS.map((b) => ({ id: b.calendarioId })),
-      }),
-    },
-  );
-  if (!respuesta.ok) throw new Error(`Google Calendar respondió ${respuesta.status}`);
-  const datos = await respuesta.json();
   return new Map(
     BARBEROS.map((b) => {
-      const calendario = datos.calendars?.[b.calendarioId];
-      if (!calendario || calendario.errors?.length) {
-        throw new Error(
-          `No se pudo leer el calendario de ${b.nombre}: ${calendario?.errors?.[0]?.reason ?? 'sin datos'}`,
-        );
-      }
-      return [
-        b.id,
-        calendario.busy.map((o) => ({ inicio: new Date(o.start), fin: new Date(o.end) })),
-      ];
+      const bloques = datos.ocupados?.[b.id];
+      if (!bloques) throw new Error(`La agenda no trajo datos de ${b.nombre}`);
+      return [b.id, bloques.map((o) => ({ inicio: new Date(o.inicio), fin: new Date(o.fin) }))];
     }),
   );
 }

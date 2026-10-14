@@ -49,18 +49,22 @@ Todo está marcado con `TODO cliente` en [`js/config.js`](js/config.js).
 ## Stack
 
 - HTML + CSS + JavaScript (módulos ES), sin build.
+- Una función serverless de Vercel (`api/disponibilidad.js`, Node 22 + Zod) que consulta Google
+  Calendar con la clave guardada en el servidor.
 - GSAP 3.12.5 + ScrollTrigger desde cdnjs, para la entrada del título y el encendido de las lámparas.
 - Tipografías de Google Fonts: Big Shoulders Display (títulos) e Instrument Sans (texto).
-- Google Calendar API (free/busy), opcional.
+- Google Calendar API (free/busy).
 
 ## Requisitos
 
-- Cualquier servidor estático. En local: Python 3 (`python -m http.server`) o `npx serve`.
+- Node 22 o superior y npm.
 
 ## Instalación y cómo correr
 
 ```bash
-python -m http.server 5180
+npm install
+cp .env.example .env   # y pega la clave de Google en GOOGLE_CALENDAR_API_KEY
+npm run dev
 ```
 
 Abre `http://localhost:5180`. El preloader sale una vez por pestaña. Para verlo otra vez, abre una
@@ -68,9 +72,12 @@ pestaña nueva. No aparece si el sistema tiene activado "reducir movimiento" ni 
 
 ## Variables de entorno
 
-No hay. La configuración vive en [`js/config.js`](js/config.js). La clave de Google
-(`AGENDA.googleApiKey`) es una clave **de navegador**, pública por diseño. Debe restringirse por
-dominio y a Calendar API. No pongas ahí claves de cuentas de servicio ni secretos de OAuth.
+| Variable                  | Dónde                                                                          | Para qué                                                |
+| ------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------- |
+| `GOOGLE_CALENDAR_API_KEY` | `.env` en local (nunca se sube) y _Settings → Environment Variables_ en Vercel | Clave de Google Cloud restringida a Google Calendar API |
+
+La clave **nunca llega al navegador**: la usa solo la función `api/disponibilidad.js`. Los IDs de
+los calendarios también viven en el servidor ([`api/_calendarios.js`](api/_calendarios.js)).
 
 ## Conectar Google Calendar
 
@@ -82,9 +89,11 @@ Se configura una sola vez:
 2. En la configuración de cada calendario: _Permisos de acceso_ → _Hacer público_ → **Ver solo
    libre/ocupado (ocultar detalles)**. Copia el **ID del calendario** (en _Integrar el calendario_).
 3. En Google Cloud Console: crea un proyecto, habilita **Google Calendar API** y crea una
-   **clave de API**. Restríngela a _Sitios web_ (el dominio de la landing) y a _Google Calendar API_.
-4. En `js/config.js`: `AGENDA.fuente = 'google'`, `AGENDA.googleApiKey = '<clave>'` y
-   `calendarioId` en cada barbero.
+   **clave de API**. En _Restricciones de API_ deja solo **Google Calendar API**. En _Restricciones
+   de aplicaciones_ elige **Ninguno**: quien llama es el servidor de Vercel, que no envía sitio web
+   de origen ni tiene una IP fija.
+4. Pon los IDs en [`api/_calendarios.js`](api/_calendarios.js) (la clave del objeto es el `id` del
+   barbero en `js/config.js`) y la clave en la variable `GOOGLE_CALENDAR_API_KEY`.
 
 ### Cómo marca el barbero una hora ocupada (sin panel de administrador)
 
@@ -103,7 +112,9 @@ ocupa esa franja en la página. No importa el título y nadie más ve los detall
 Los eventos marcados como **Disponible** (en vez de _Ocupado_) no bloquean. La página vuelve a leer
 el calendario cada 5 minutos y cada vez que alguien la abre.
 
-La página lee los bloques ocupados de los próximos 7 días, los vuelve a leer cada 5 minutos y
+La página pide a `/api/disponibilidad` los bloques ocupados de los próximos 7 días. La respuesta
+queda 60 s en la caché de Vercel, así que muchas visitas generan pocas consultas a Google. La
+página los vuelve a leer cada 5 minutos y
 calcula las horas libres con el horario del local, los descansos y los almuerzos. Si Google no
 responde, la página avisa "Agenda no disponible" y ofrece WhatsApp. El detalle técnico queda en la
 consola del navegador.
@@ -114,11 +125,11 @@ propuesta: un backend que cree el evento directamente.
 
 ## Scripts
 
-No hay `package.json`. Formato opcional con Prettier (configuración incluida):
-
-```bash
-npx prettier --check .
-```
+| Script           | Qué hace                                                                   |
+| ---------------- | -------------------------------------------------------------------------- |
+| `npm run dev`    | Landing y `/api/disponibilidad` en `http://localhost:5180`, como en Vercel |
+| `npm run format` | Formatea con Prettier                                                      |
+| `npm run check`  | Formato y sintaxis de la función y del servidor local                      |
 
 ## Estructura
 
@@ -138,8 +149,12 @@ js/main.js                 Arranque: rellena la marca y coordina plano, reserva 
 js/animation.js            GSAP: entrada del título y encendido de lámparas
 assets/icons/favicon.svg   Poste de barbería
 assets/images/og.png       Imagen para redes (1200 × 630)
+api/disponibilidad.js      Función de Vercel: consulta Google Calendar con la clave del servidor
+api/_calendarios.js        ID del calendario de cada barbero (solo servidor)
+scripts/servidor-local.mjs Servidor de desarrollo (npm run dev)
 docs/adr/                  Decisiones de arquitectura
-_headers                   Cabeceras de seguridad (Cloudflare Pages / Netlify)
+vercel.json                Cabeceras de seguridad en Vercel
+_headers                   Las mismas cabeceras para Cloudflare Pages / Netlify
 ```
 
 ## Personalización
@@ -156,9 +171,13 @@ _headers                   Cabeceras de seguridad (Cloudflare Pages / Netlify)
 
 ## Despliegue
 
-Sitio estático: Cloudflare Pages, Netlify o GitHub Pages (skill `desplegar`). En Cloudflare Pages
-y Netlify se aplican las cabeceras de `_headers`. Si se activa Google Calendar, la CSP ya permite
-`https://www.googleapis.com` en `connect-src`.
+**Vercel** (por la función de `api/`):
+
+1. _Add New → Project_ e importa el repositorio. Framework Preset: **Other**, sin comando de build.
+2. _Settings → Environment Variables_: agrega `GOOGLE_CALENDAR_API_KEY` para Production y Preview.
+3. Despliega. Las cabeceras de seguridad salen de `vercel.json`.
+
+Si cambias la variable, vuelve a desplegar para que la función la tome.
 
 ## Seguridad
 
@@ -167,4 +186,6 @@ y Netlify se aplican las cabeceras de `_headers`. Si se activa Google Calendar, 
   de WhatsApp que él mismo envía; el enlace para la barbería lo lleva al título del evento en su
   calendario privado. El enlace "Añadir a Google Calendar" del cliente no incluye el nombre.
 - Los precios son informativos; no hay pagos en línea.
-- La única clave posible (`googleApiKey`) es de navegador, restringida por dominio y por API.
+- La clave de Google vive solo en variables de entorno del servidor y está restringida a Calendar
+  API. Las respuestas de error al navegador no incluyen detalles internos; los logs no la imprimen.
+- `connect-src 'self'`: el navegador solo habla con el mismo dominio.
