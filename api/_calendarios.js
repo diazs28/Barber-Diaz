@@ -1,11 +1,13 @@
 // Calendario de Google de cada barbero (id del barbero en js/config.js → ID del calendario).
 // Vive en el servidor: la página nunca ve estos IDs. Los archivos con "_" no son rutas en Vercel.
-// TODO cliente: calendarios de PRUEBA (cuenta de Johan). Al vender la landing se cambian por los
-// calendarios de la cuenta de Google del negocio.
+// Cuenta dueña: magiabarber8@gmail.com. Cada calendario es público como "solo libre/ocupado" y
+// está compartido con la cuenta de servicio (reservas-web@barber-diaz.iam.gserviceaccount.com)
+// con permiso "Hacer cambios y ver todos los detalles del evento".
+// TODO cliente: cuenta de PRUEBA. Al vender la landing se cambian por los del negocio.
 export const CALENDARIOS = {
   alexander:
-    'c_6cc62c111768f4c29e004f39bd67db4bc2e1d339816e741441735fea0b7c0d64@group.calendar.google.com',
+    '7b8d0cf66886c7309d9c7b04f30dca85cd9195ed13192c5f410c0a3a44917058@group.calendar.google.com',
   david:
-    'c_568a641cf31cfeb3a8063e735a4b0264cc82647d338e0d3b929644b3ca5f6ef4@group.calendar.google.com',
-  x: 'c_34e0e29c34adb8418e3fd717b536aea52ce71a649a36cf5b99af7b5dc388ef62@group.calendar.google.com',
+    '25d489d3e79733f4914c89eb1aaf1ffe62e7efbcae3b337d51ff46f144b23f24@group.calendar.google.com',
+  x: 'dacae05b604680fa2c46cf1ad689ef61c02ae82df2f5b8517a59b618a729ce4c@group.calendar.google.com',
 };
