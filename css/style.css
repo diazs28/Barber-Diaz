@@ -1,24 +1,25 @@
-/* Barber Mafia — "la trastienda": paño verde de billar, cuero sangre de buey, latón y papel marfil.
-   La lámpara colgante sobre el paño es el motivo: ilumina el inicio y enciende las sillas libres del plano. */
+/* Barber Mafia — azul oscuro de noche, blanco de barbería clásica y hueso de papel y cuero.
+   La lámpara colgante es el motivo: ilumina el inicio y enciende las sillas libres del plano. */
 
 :root {
   /* Color */
-  --verde-pano: #13302a;
-  --verde-hondo: #0d2420;
-  --verde-noche: #0a1c19;
-  --verde-claro: #1d4239;
-  --linea: #2c5248;
-  --sangre: #7a2430;
-  --sangre-viva: #e0707a;
-  --laton: #c8a35a;
-  --laton-claro: #e4c98a;
-  --laton-oscuro: #8a6a2c;
-  --marfil: #efe6d3;
-  --marfil-tenue: #b9b29f;
-  --papel: #f4ecdb;
-  --tinta: #1f1a16;
-  --tinta-tenue: #5b5248;
-  --gris-turno: #9aa39d;
+  --azul-noche: #0f1d33;
+  --azul-hondo: #0a1628;
+  --azul-medianoche: #07101e;
+  --azul-claro: #1c3152;
+  --linea: #2a4166;
+  --rojo: #9e2b35;
+  --rojo-vivo: #e9757e;
+  --hueso: #e3d6bd;
+  --hueso-claro: #f4ede0;
+  --hueso-oscuro: #9c8a68;
+  --blanco: #faf8f4;
+  --gris-azul: #a8b5c8;
+  --papel: #f3eee4;
+  --tinta: #0f1d33;
+  --tinta-tenue: #4a5568;
+  --gris-turno: #8c97a8;
+  --azul-sombra: #2f4f80;
 
   /* Tipografía: Big Shoulders nació para la señalética de Chicago; Instrument Sans para leer */
   --font-display: 'Big Shoulders Display', 'Arial Narrow', 'Roboto Condensed', sans-serif;
@@ -47,12 +48,12 @@
 body {
   font-family: var(--font-body);
   font-size: var(--fs-base);
-  color: var(--marfil);
-  background: var(--verde-pano);
+  color: var(--blanco);
+  background: var(--azul-noche);
 }
 
 :focus-visible {
-  outline-color: var(--laton-claro);
+  outline-color: var(--hueso-claro);
 }
 
 .contenedor {
@@ -65,8 +66,8 @@ body {
   left: var(--space-sm);
   top: -4rem;
   padding: var(--space-xs) var(--space-sm);
-  background: var(--laton);
-  color: var(--verde-hondo);
+  background: var(--hueso);
+  color: var(--azul-hondo);
   font-weight: 600;
   z-index: 100;
 }
@@ -79,7 +80,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: color-mix(in srgb, var(--verde-hondo) 90%, transparent);
+  background: color-mix(in srgb, var(--azul-hondo) 90%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--linea);
 }
@@ -109,7 +110,7 @@ body {
   place-items: center;
   width: 2.75rem;
   height: 2.75rem;
-  color: var(--marfil);
+  color: var(--blanco);
 }
 .menu-boton__icono {
   display: block;
@@ -127,7 +128,7 @@ body {
   flex-direction: column;
   gap: var(--space-xs);
   padding: var(--space-sm) 1rem var(--space-md);
-  background: var(--verde-hondo);
+  background: var(--azul-hondo);
   border-bottom: 1px solid var(--linea);
 }
 .menu.is-abierto {
@@ -140,7 +141,7 @@ body {
   text-underline-offset: 0.35em;
 }
 .menu a:hover {
-  color: var(--laton-claro);
+  color: var(--hueso-claro);
   text-decoration: underline;
 }
 @media (min-width: 768px) {
@@ -166,10 +167,10 @@ body {
   gap: var(--space-xs);
   min-height: 3rem;
   padding: 0.7rem 1.4rem;
-  border: 1px solid var(--laton);
+  border: 1px solid var(--hueso);
   border-radius: 4px;
-  background: var(--laton);
-  color: var(--verde-hondo);
+  background: var(--hueso);
+  color: var(--azul-hondo);
   font-weight: 600;
   text-align: center;
   text-decoration: none;
@@ -178,21 +179,21 @@ body {
     border-color 0.2s ease;
 }
 .boton:hover {
-  background: var(--laton-claro);
-  border-color: var(--laton-claro);
+  background: var(--hueso-claro);
+  border-color: var(--hueso-claro);
 }
 .boton--borde {
   background: transparent;
-  color: var(--laton-claro);
+  color: var(--hueso-claro);
 }
 .boton--borde:hover {
-  background: rgb(200 163 90 / 0.12);
+  background: rgb(227 214 189 / 0.12);
 }
 .boton--bloque {
   width: 100%;
 }
 .enlace {
-  color: var(--laton-claro);
+  color: var(--hueso-claro);
   font-weight: 500;
   text-underline-offset: 0.25em;
 }
@@ -203,16 +204,16 @@ body {
 /* ---------- 1. Inicio ---------- */
 .hero {
   position: relative;
-  padding-block: clamp(2.5rem, 1rem + 6vw, 5.5rem) var(--space-xl);
-  /* La lámpara colgante sobre el paño */
+  padding-block: clamp(2rem, 1rem + 4vw, 4rem) clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+  /* La lámpara colgante sobre el local */
   background:
-    radial-gradient(ellipse 55% 60% at 20% -5%, rgb(228 201 138 / 0.17), transparent 70%),
-    radial-gradient(ellipse 80% 70% at 50% 120%, rgb(5 18 15 / 0.55), transparent 70%),
-    var(--verde-pano);
+    radial-gradient(ellipse 55% 70% at 18% -10%, rgb(244 237 224 / 0.14), transparent 70%),
+    radial-gradient(ellipse 80% 70% at 50% 120%, rgb(4 10 20 / 0.55), transparent 70%),
+    var(--azul-noche);
 }
 .hero__rejilla {
   display: grid;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
 }
 .hero__titulo {
   font-family: var(--font-display);
@@ -221,8 +222,8 @@ body {
   line-height: 0.82;
   letter-spacing: 0;
   text-transform: uppercase;
-  /* Letrero de vitrina: pan de oro con sombra en bloque */
-  filter: drop-shadow(0.035em 0.04em 0 var(--sangre));
+  /* Letrero de vitrina: blanco y hueso con sombra en bloque azul */
+  filter: drop-shadow(0.035em 0.04em 0 var(--azul-sombra));
 }
 .hero__mascara {
   display: block;
@@ -234,14 +235,18 @@ body {
   display: block;
   background: linear-gradient(
     180deg,
-    #f8e7b6 0%,
-    var(--laton-claro) 35%,
-    var(--laton) 62%,
-    #94702f 100%
+    #ffffff 0%,
+    var(--hueso-claro) 40%,
+    var(--hueso) 70%,
+    #c2b08e 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+.hero__resto {
+  display: grid;
+  justify-items: start;
 }
 .hero__eslogan {
   max-width: 26ch;
@@ -253,7 +258,7 @@ body {
 .hero__texto {
   max-width: 52ch;
   margin-top: var(--space-sm);
-  color: var(--marfil-tenue);
+  color: var(--gris-azul);
 }
 .hero__acciones {
   display: flex;
@@ -262,20 +267,14 @@ body {
   margin-top: var(--space-lg);
 }
 
-.hero__casa {
-  display: grid;
-  align-content: start;
-  gap: var(--space-md);
-}
 .ahora {
-  justify-self: start;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   padding: 0.45rem 0.9rem;
   border: 1px solid var(--linea);
   border-radius: 999px;
-  background: rgb(5 18 15 / 0.35);
+  background: rgb(4 10 20 / 0.35);
   font-size: var(--fs-sm);
   font-weight: 500;
 }
@@ -286,38 +285,20 @@ body {
   background: var(--gris-turno);
 }
 .ahora[data-estado='libre'] .ahora__punto {
-  background: var(--laton-claro);
-  box-shadow: 0 0 0 0 rgb(228 201 138 / 0.6);
+  background: var(--blanco);
+  box-shadow: 0 0 0 0 rgb(244 237 224 / 0.6);
   animation: latido 2.2s ease-out infinite;
 }
 .ahora[data-estado='ocupado'] .ahora__punto {
-  background: var(--sangre-viva);
+  background: var(--rojo-vivo);
 }
 @keyframes latido {
   to {
-    box-shadow: 0 0 0 0.6rem rgb(228 201 138 / 0);
+    box-shadow: 0 0 0 0.6rem rgb(244 237 224 / 0);
   }
 }
 
-.datos {
-  display: grid;
-  gap: var(--space-sm);
-}
-.datos__fila {
-  display: grid;
-  grid-template-columns: 6.5rem 1fr;
-  gap: var(--space-sm);
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--linea);
-}
-.datos dt {
-  color: var(--marfil-tenue);
-  font-size: var(--fs-sm);
-}
-.datos dd .enlace {
-  display: inline-block;
-  margin-top: var(--space-2xs);
-}
+/* Horario (pie de página) */
 .horario li {
   display: flex;
   flex-wrap: wrap;
@@ -328,55 +309,13 @@ body {
   margin-top: var(--space-2xs);
 }
 
-.carta__titulo {
-  margin-top: var(--space-xs);
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: var(--fs-h3);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  color: var(--laton-claro);
-}
-.carta {
-  display: grid;
-  gap: 0.9rem;
-}
-.carta__item {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: baseline;
-  column-gap: var(--space-xs);
-}
-.carta__nombre {
-  font-weight: 600;
-}
-.carta__puntos {
-  border-bottom: 2px dotted rgb(185 178 159 / 0.45);
-  transform: translateY(-0.25em);
-}
-.carta__precio {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.3rem;
-  color: var(--laton-claro);
-}
-.carta__tiempo {
-  grid-column: 1 / -1;
-  font-size: var(--fs-sm);
-  color: var(--marfil-tenue);
-}
-.carta__nota {
-  font-size: var(--fs-sm);
-  color: var(--marfil-tenue);
-}
-
 @media (min-width: 960px) {
   .hero__rejilla {
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
     align-items: end;
     gap: clamp(3rem, 6vw, 6rem);
   }
-  .hero__casa {
+  .hero__resto {
     padding-left: clamp(2rem, 4vw, 3.5rem);
     border-left: 1px solid var(--linea);
   }
@@ -384,8 +323,8 @@ body {
 
 /* ---------- 2. Agenda: plano y reserva ---------- */
 .agenda {
-  padding-block: var(--space-xl);
-  background: var(--verde-hondo);
+  padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem) var(--space-xl);
+  background: var(--azul-hondo);
   border-top: 1px solid var(--linea);
 }
 .agenda__cabeza {
@@ -399,11 +338,11 @@ body {
   font-size: var(--fs-h2);
   line-height: 0.9;
   text-transform: uppercase;
-  color: var(--laton-claro);
+  color: var(--hueso-claro);
 }
 .agenda__intro {
   max-width: 56ch;
-  color: var(--marfil-tenue);
+  color: var(--gris-azul);
 }
 .leyenda {
   display: flex;
@@ -423,11 +362,11 @@ body {
   background: var(--gris-turno);
 }
 .leyenda__marca[data-estado='libre'] {
-  background: var(--laton-claro);
-  box-shadow: 0 0 10px 2px rgb(228 201 138 / 0.55);
+  background: var(--hueso-claro);
+  box-shadow: 0 0 10px 2px rgb(244 237 224 / 0.55);
 }
 .leyenda__marca[data-estado='ocupado'] {
-  background: var(--sangre-viva);
+  background: var(--rojo-vivo);
 }
 
 .agenda__rejilla {
@@ -477,10 +416,10 @@ body {
   font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.06em;
-  fill: #5a4a38;
+  fill: #3d4a5e;
 }
 .plano__rotulo--claro {
-  fill: var(--marfil);
+  fill: var(--blanco);
 }
 
 .puesto__luz {
@@ -519,12 +458,12 @@ body {
 .plano:has(.silla-boton[data-silla='1']:hover) .puesto[data-silla='1'] .puesto__zona,
 .plano:has(.silla-boton[data-silla='2']:hover) .puesto[data-silla='2'] .puesto__zona,
 .plano:has(.silla-boton[data-silla='3']:hover) .puesto[data-silla='3'] .puesto__zona {
-  fill: rgb(200 163 90 / 0.12);
-  stroke: rgb(138 106 44 / 0.5);
+  fill: rgb(227 214 189 / 0.12);
+  stroke: rgb(156 138 104 / 0.5);
 }
 .puesto.is-elegido .puesto__zona {
-  fill: rgb(200 163 90 / 0.16);
-  stroke: var(--laton-oscuro);
+  fill: rgb(227 214 189 / 0.16);
+  stroke: var(--hueso-oscuro);
   stroke-dasharray: 6 4;
 }
 
@@ -556,7 +495,7 @@ body {
   height: 20%;
 }
 .silla-boton:focus-visible {
-  outline: 2px solid var(--verde-pano);
+  outline: 2px solid var(--azul-noche);
   outline-offset: -2px;
 }
 .silla-boton__rotulo {
@@ -565,10 +504,10 @@ body {
   align-items: center;
   column-gap: 0.45rem;
   padding: 0.3rem 0.6rem 0.3rem 0.3rem;
-  border: 1px solid rgb(200 163 90 / 0.6);
+  border: 1px solid rgb(227 214 189 / 0.6);
   border-radius: var(--radio);
-  background: rgb(13 36 32 / 0.93);
-  color: var(--marfil);
+  background: rgb(10 22 40 / 0.93);
+  color: var(--blanco);
   text-align: left;
   white-space: nowrap;
   box-shadow: 0 8px 16px -8px rgb(0 0 0 / 0.7);
@@ -586,8 +525,8 @@ body {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
-  background: var(--laton);
-  color: var(--verde-hondo);
+  background: var(--hueso);
+  color: var(--azul-hondo);
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 1rem;
@@ -607,7 +546,7 @@ body {
   gap: 0.3rem;
   font-size: 0.72rem;
   line-height: 1.25;
-  color: var(--marfil-tenue);
+  color: var(--gris-azul);
 }
 .silla-boton__estado::before {
   content: '';
@@ -617,41 +556,41 @@ body {
   background: var(--gris-turno);
 }
 .silla-boton[data-estado='libre'] .silla-boton__estado {
-  color: var(--laton-claro);
+  color: var(--hueso-claro);
 }
 .silla-boton[data-estado='libre'] .silla-boton__estado::before {
-  background: var(--laton-claro);
-  box-shadow: 0 0 6px 1px rgb(228 201 138 / 0.7);
+  background: var(--hueso-claro);
+  box-shadow: 0 0 6px 1px rgb(244 237 224 / 0.7);
 }
 .silla-boton[data-estado='ocupado'] .silla-boton__estado::before {
-  background: var(--sangre-viva);
+  background: var(--rojo-vivo);
 }
 .silla-boton[aria-pressed='true'] .silla-boton__rotulo {
-  background: var(--laton-claro);
-  border-color: var(--laton-claro);
-  color: var(--verde-hondo);
+  background: var(--hueso-claro);
+  border-color: var(--hueso-claro);
+  color: var(--azul-hondo);
 }
 .silla-boton[aria-pressed='true'] .silla-boton__numero {
-  background: var(--verde-hondo);
-  color: var(--laton-claro);
+  background: var(--azul-hondo);
+  color: var(--hueso-claro);
 }
 .silla-boton[aria-pressed='true'] .silla-boton__estado {
-  color: var(--verde-hondo);
+  color: var(--azul-hondo);
 }
 
-/* Panel de reserva: tarjeta de cita impresa en papel marfil */
+/* Panel de reserva: tarjeta de cita impresa en papel hueso */
 .reserva {
   scroll-margin-top: 5rem;
   padding: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
   border-radius: var(--radio);
   background: var(--papel);
   color: var(--tinta);
-  outline: 1px solid rgb(138 106 44 / 0.35);
+  outline: 1px solid rgb(156 138 104 / 0.35);
   outline-offset: -8px;
   box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.75);
 }
 .reserva :focus-visible {
-  outline-color: var(--verde-pano);
+  outline-color: var(--azul-noche);
 }
 @media (min-width: 960px) {
   .reserva {
@@ -693,7 +632,7 @@ body {
   gap: var(--space-sm);
   align-items: start;
   padding-bottom: var(--space-md);
-  border-bottom: 1px solid rgb(31 26 22 / 0.15);
+  border-bottom: 1px solid rgb(15 29 51 / 0.15);
 }
 .reserva__inicial {
   display: grid;
@@ -701,12 +640,12 @@ body {
   width: 3.25rem;
   height: 3.25rem;
   border-radius: 50%;
-  background: var(--verde-pano);
-  color: var(--laton-claro);
+  background: var(--azul-noche);
+  color: var(--hueso-claro);
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 1.75rem;
-  box-shadow: inset 0 0 0 2px var(--laton);
+  box-shadow: inset 0 0 0 2px var(--hueso);
 }
 .reserva__detalle {
   margin-top: 0.15rem;
@@ -730,11 +669,11 @@ body {
   background: var(--gris-turno);
 }
 .reserva__estado[data-estado='libre']::before {
-  background: var(--laton);
-  box-shadow: 0 0 0 3px rgb(200 163 90 / 0.3);
+  background: var(--azul-noche);
+  box-shadow: 0 0 0 3px var(--hueso);
 }
 .reserva__estado[data-estado='ocupado']::before {
-  background: var(--sangre);
+  background: var(--rojo);
 }
 
 .paso {
@@ -760,7 +699,7 @@ body {
 .opcion-dia,
 .opcion-hora {
   position: relative;
-  border: 1px solid rgb(31 26 22 / 0.22);
+  border: 1px solid rgb(15 29 51 / 0.55);
   border-radius: var(--radio);
   background: rgb(255 255 255 / 0.45);
   cursor: pointer;
@@ -779,27 +718,27 @@ body {
 .opcion-servicio:hover,
 .opcion-dia:hover,
 .opcion-hora:hover {
-  border-color: var(--verde-pano);
+  border-color: var(--azul-noche);
 }
 .opcion-servicio:has(input:focus-visible),
 .opcion-dia:has(input:focus-visible),
 .opcion-hora:has(input:focus-visible) {
-  outline: 2px solid var(--verde-pano);
+  outline: 2px solid var(--azul-noche);
   outline-offset: 2px;
 }
 .opcion-servicio:has(input:checked),
 .opcion-dia:has(input:checked),
 .opcion-hora:has(input:checked) {
-  border-color: var(--verde-pano);
-  background: var(--verde-pano);
-  color: var(--marfil);
+  border-color: var(--azul-noche);
+  background: var(--azul-noche);
+  color: var(--blanco);
 }
 .opcion-dia:has(input:disabled),
 .opcion-hora:has(input:disabled) {
   cursor: not-allowed;
   border-style: dashed;
   background: transparent;
-  color: rgb(31 26 22 / 0.42);
+  color: rgb(15 29 51 / 0.42);
 }
 .opcion-hora:has(input:disabled) .opcion-hora__texto {
   text-decoration: line-through;
@@ -876,36 +815,36 @@ body {
   width: 100%;
   min-height: 3rem;
   padding: 0.6rem 0.85rem;
-  border: 1px solid rgb(31 26 22 / 0.35);
+  border: 1px solid var(--tinta-tenue);
   border-radius: var(--radio);
   background: #fffdf7;
 }
 .campo:focus-visible {
-  outline: 2px solid var(--verde-pano);
+  outline: 2px solid var(--azul-noche);
   outline-offset: 1px;
 }
 .campo[aria-invalid='true'] {
-  border-color: var(--sangre);
+  border-color: var(--rojo);
 }
 .reserva__error {
   padding: 0.6rem 0.8rem;
-  border-left: 3px solid var(--sangre);
-  background: rgb(122 36 48 / 0.08);
-  color: var(--sangre);
+  border-left: 3px solid var(--rojo);
+  background: rgb(158 43 53 / 0.08);
+  color: var(--rojo);
   font-weight: 600;
   font-size: var(--fs-sm);
 }
 .reserva .boton {
-  border-color: var(--verde-pano);
-  background: var(--verde-pano);
-  color: var(--marfil);
+  border-color: var(--azul-noche);
+  background: var(--azul-noche);
+  color: var(--blanco);
 }
 .reserva .boton:hover {
-  border-color: var(--verde-claro);
-  background: var(--verde-claro);
+  border-color: var(--azul-claro);
+  background: var(--azul-claro);
 }
 .reserva .enlace {
-  color: var(--sangre);
+  color: var(--rojo);
 }
 .reserva__nota {
   font-size: var(--fs-sm);
@@ -939,7 +878,7 @@ body {
 /* ---------- 3. Pie de página ---------- */
 .pie {
   padding-block: var(--space-xl) var(--space-md);
-  background: var(--verde-noche);
+  background: var(--azul-medianoche);
   border-top: 1px solid var(--linea);
 }
 .pie__rejilla {
@@ -952,12 +891,12 @@ body {
   font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
   line-height: 0.9;
   text-transform: uppercase;
-  color: var(--laton-claro);
+  color: var(--hueso-claro);
 }
 .pie__marca p + p {
   max-width: 24ch;
   margin-top: var(--space-sm);
-  color: var(--marfil-tenue);
+  color: var(--gris-azul);
 }
 .pie__titulo {
   margin-bottom: var(--space-sm);
@@ -978,14 +917,14 @@ body {
 }
 .pie__etiqueta {
   font-size: var(--fs-sm);
-  color: var(--marfil-tenue);
+  color: var(--gris-azul);
 }
 .pie__lista a:not(.enlace) {
-  text-decoration-color: var(--laton);
+  text-decoration-color: var(--hueso);
   text-underline-offset: 0.25em;
 }
 .pie__lista a:not(.enlace):hover {
-  color: var(--laton-claro);
+  color: var(--hueso-claro);
 }
 .pie .horario {
   width: min(100%, 20rem);
@@ -999,7 +938,7 @@ body {
   padding-top: var(--space-md);
   border-top: 1px solid var(--linea);
   font-size: var(--fs-sm);
-  color: var(--marfil-tenue);
+  color: var(--gris-azul);
 }
 @media (min-width: 768px) {
   .pie__rejilla {

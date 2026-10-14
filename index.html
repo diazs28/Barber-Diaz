@@ -8,7 +8,7 @@
       name="description"
       content="Barbería en el centro de Popayán. Mira en el plano qué barbero está libre y agenda tu corte en minutos."
     />
-    <meta name="theme-color" content="#13302a" />
+    <meta name="theme-color" content="#0a1628" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />
@@ -33,10 +33,17 @@
 
     <!-- Sin defer: decide antes de pintar si se muestra el preloader -->
     <script src="js/intro.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
+      crossorigin="anonymous"
+    ></script>
     <script
       defer
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
+      crossorigin="anonymous"
     ></script>
     <script type="module" src="js/main.js"></script>
     <script defer src="js/animation.js"></script>
@@ -70,14 +77,14 @@
               </clipPath>
             </defs>
             <g clip-path="url(#poste-recorte)">
-              <rect x="2" y="4" width="10" height="24" fill="#efe6d3" />
+              <rect x="2" y="4" width="10" height="24" fill="#f5f2ec" />
               <path
                 d="M-2 12 16 2v5L-2 17Zm0 10L16 12v5L-2 27Zm0 10L16 22v5L-2 37Z"
-                fill="#7a2430"
+                fill="#1c3152"
               />
             </g>
-            <rect x="0" y="0" width="14" height="5" rx="2.5" fill="#c8a35a" />
-            <rect x="0" y="27" width="14" height="5" rx="2.5" fill="#c8a35a" />
+            <rect x="0" y="0" width="14" height="5" rx="2.5" fill="#e3d6bd" />
+            <rect x="0" y="27" width="14" height="5" rx="2.5" fill="#e3d6bd" />
           </svg>
           <span data-marca="nombre">Barber Mafia</span>
         </a>
@@ -100,55 +107,32 @@
     </header>
 
     <main id="contenido">
-      <!-- 1. Inicio: información del local -->
+      <!-- 1. Inicio -->
       <section class="hero" id="inicio" aria-labelledby="hero-titulo">
         <div class="contenedor hero__rejilla">
-          <div class="hero__principal">
-            <h1 class="hero__titulo" id="hero-titulo" data-titulo-marca>
-              <span class="hero__mascara"><span class="hero__linea">Barber</span></span>
-              <span class="hero__mascara"><span class="hero__linea">Mafia</span></span>
-            </h1>
-            <div class="hero__resto" data-anim="hero-resto">
-              <p class="hero__eslogan" data-marca="eslogan"></p>
-              <p class="hero__texto" data-marca="presentacion"></p>
-              <div class="hero__acciones">
-                <a class="boton" href="#agenda">Agenda tu silla</a>
-                <a
-                  class="boton boton--borde"
-                  data-enlace="whatsapp"
-                  href="#"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Escríbenos por WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero__casa">
+          <h1 class="hero__titulo" id="hero-titulo" data-titulo-marca>
+            <span class="hero__mascara"><span class="hero__linea">Barber</span></span>
+            <span class="hero__mascara"><span class="hero__linea">Mafia</span></span>
+          </h1>
+          <div class="hero__resto" data-anim="hero-resto">
             <p class="ahora" data-ahora data-estado="cargando" aria-live="polite">
               <span class="ahora__punto" aria-hidden="true"></span>
               <span data-ahora-texto>Consultando las sillas…</span>
             </p>
-            <dl class="datos">
-              <div class="datos__fila">
-                <dt>Dirección</dt>
-                <dd>
-                  <span data-marca="direccion"></span>, <span data-marca="ciudad"></span>
-                  <a class="enlace" data-enlace="mapa" href="#" target="_blank" rel="noopener"
-                    >Cómo llegar</a
-                  >
-                </dd>
-              </div>
-              <div class="datos__fila">
-                <dt>Horario</dt>
-                <dd><ul class="horario" data-horario role="list"></ul></dd>
-              </div>
-            </dl>
-            <h2 class="carta__titulo">Servicios</h2>
-            <ul class="carta" data-carta role="list"></ul>
-            <p class="carta__nota">Precios de referencia. Pagas en el local al terminar.</p>
+            <p class="hero__eslogan" data-marca="eslogan"></p>
+            <p class="hero__texto" data-marca="presentacion"></p>
+            <div class="hero__acciones">
+              <a class="boton" href="#agenda">Agenda tu silla</a>
+              <a
+                class="boton boton--borde"
+                data-enlace="whatsapp"
+                href="#"
+                target="_blank"
+                rel="noopener"
+              >
+                Escríbenos por WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -201,29 +185,29 @@
                     patternUnits="userSpaceOnUse"
                     patternTransform="rotate(45)"
                   >
-                    <rect width="16" height="16" fill="#e8dfca" />
-                    <rect width="8" height="8" fill="#cfc2a4" />
-                    <rect x="8" y="8" width="8" height="8" fill="#cfc2a4" />
+                    <rect width="16" height="16" fill="#f5f2ec" />
+                    <rect width="8" height="8" fill="#ddd2bd" />
+                    <rect x="8" y="8" width="8" height="8" fill="#ddd2bd" />
                   </pattern>
                   <pattern id="baldosa-bano" width="8" height="8" patternUnits="userSpaceOnUse">
                     <rect width="8" height="8" fill="#dfe5e3" />
                     <path d="M8 0H0V8" fill="none" stroke="#c4cdca" stroke-width="0.8" />
                   </pattern>
                   <pattern id="cuadricula" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <rect width="20" height="20" fill="#163630" />
-                    <path d="M20 0H0V20" fill="none" stroke="#1f4239" stroke-width="0.7" />
+                    <rect width="20" height="20" fill="#12223a" />
+                    <path d="M20 0H0V20" fill="none" stroke="#1b2f4d" stroke-width="0.7" />
                   </pattern>
                   <pattern id="toldo" width="12" height="12" patternUnits="userSpaceOnUse">
-                    <rect width="6" height="12" fill="#7a2430" />
-                    <rect x="6" width="6" height="12" fill="#efe6d3" />
+                    <rect width="6" height="12" fill="#1c3152" />
+                    <rect x="6" width="6" height="12" fill="#f5f2ec" />
                   </pattern>
                   <pattern id="capitone" width="7" height="9" patternUnits="userSpaceOnUse">
-                    <rect width="7" height="9" fill="#1b4439" />
-                    <circle cx="3.5" cy="4.5" r="1.1" fill="#0f2b24" />
+                    <rect width="7" height="9" fill="#22385c" />
+                    <circle cx="3.5" cy="4.5" r="1.1" fill="#142540" />
                   </pattern>
                   <pattern id="productos" width="13" height="20" patternUnits="userSpaceOnUse">
-                    <circle cx="6.5" cy="6" r="3.4" fill="#c8a35a" />
-                    <circle cx="6.5" cy="15" r="3" fill="#2f5e52" />
+                    <circle cx="6.5" cy="6" r="3.4" fill="#e3d6bd" />
+                    <circle cx="6.5" cy="15" r="3" fill="#2a4166" />
                   </pattern>
                   <linearGradient id="madera" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0" stop-color="#80583a" />
@@ -235,9 +219,9 @@
                     <stop offset="1" stop-color="#e2ecee" />
                   </linearGradient>
                   <radialGradient id="luz-libre">
-                    <stop offset="0" stop-color="#ffe7a8" stop-opacity="0.95" />
-                    <stop offset="0.55" stop-color="#e4c98a" stop-opacity="0.45" />
-                    <stop offset="1" stop-color="#e4c98a" stop-opacity="0" />
+                    <stop offset="0" stop-color="#ffe9b0" stop-opacity="0.95" />
+                    <stop offset="0.55" stop-color="#f6dc9c" stop-opacity="0.5" />
+                    <stop offset="1" stop-color="#f6dc9c" stop-opacity="0" />
                   </radialGradient>
                   <radialGradient id="luz-ocupado">
                     <stop offset="0" stop-color="#f1b3a0" stop-opacity="0.7" />
@@ -245,8 +229,8 @@
                     <stop offset="1" stop-color="#c4505b" stop-opacity="0" />
                   </radialGradient>
                   <radialGradient id="penumbra" cx="0.5" cy="0.45" r="0.75">
-                    <stop offset="0.55" stop-color="#3a2a18" stop-opacity="0" />
-                    <stop offset="1" stop-color="#3a2a18" stop-opacity="0.28" />
+                    <stop offset="0.55" stop-color="#1a2436" stop-opacity="0" />
+                    <stop offset="1" stop-color="#1a2436" stop-opacity="0.28" />
                   </radialGradient>
 
                   <!-- Silla de barbero vista desde arriba; el frente (reposapiés) mira hacia -y -->
@@ -255,12 +239,12 @@
                     <circle r="13.5" fill="#9aa2a6" />
                     <rect x="-2" y="-27" width="4" height="10" fill="#8a9296" />
                     <rect x="-10" y="-32" width="20" height="6" rx="2" fill="#c3c9cc" />
-                    <rect x="-18.5" y="-15" width="6.5" height="26" rx="3" fill="#4b141b" />
-                    <rect x="12" y="-15" width="6.5" height="26" rx="3" fill="#4b141b" />
-                    <rect x="-13" y="-18" width="26" height="28" rx="6" fill="#7a2430" />
-                    <rect x="-9" y="-14" width="18" height="17" rx="4" fill="#8f2e3a" />
-                    <rect x="-15" y="8" width="30" height="11" rx="4.5" fill="#5e1a23" />
-                    <rect x="-7.5" y="18" width="15" height="6.5" rx="3" fill="#47121a" />
+                    <rect x="-18.5" y="-15" width="6.5" height="26" rx="3" fill="#13233d" />
+                    <rect x="12" y="-15" width="6.5" height="26" rx="3" fill="#13233d" />
+                    <rect x="-13" y="-18" width="26" height="28" rx="6" fill="#1c3152" />
+                    <rect x="-9" y="-14" width="18" height="17" rx="4" fill="#2a4772" />
+                    <rect x="-15" y="8" width="30" height="11" rx="4.5" fill="#172b48" />
+                    <rect x="-7.5" y="18" width="15" height="6.5" rx="3" fill="#102038" />
                   </g>
                   <!-- Cliente sentado con la capa puesta -->
                   <g id="cliente">
@@ -293,8 +277,8 @@
 
                 <!-- Exterior y andén -->
                 <rect width="400" height="600" fill="url(#cuadricula)" />
-                <rect width="400" height="34" fill="#3a4843" />
-                <path d="M80 0V34M160 0V34M240 0V34M320 0V34" stroke="#2c3935" stroke-width="1" />
+                <rect width="400" height="34" fill="#2b3a52" />
+                <path d="M80 0V34M160 0V34M240 0V34M320 0V34" stroke="#22304a" stroke-width="1" />
                 <rect
                   x="128"
                   y="3"
@@ -339,8 +323,8 @@
                   <rect x="25" y="66" width="23" height="94" rx="2" fill="url(#madera)" />
                   <rect x="25" y="70" width="4" height="86" fill="url(#espejo)" />
                   <ellipse cx="38" cy="112" rx="5.5" ry="8" fill="#dde2e4" stroke="#a7b0b3" />
-                  <circle cx="38" cy="80" r="2.6" fill="#c8a35a" />
-                  <circle cx="38" cy="88" r="2.6" fill="#2f5e52" />
+                  <circle cx="38" cy="80" r="2.6" fill="#e3d6bd" />
+                  <circle cx="38" cy="88" r="2.6" fill="#2a4166" />
                   <rect x="34" y="136" width="8" height="15" rx="3" fill="#2b2420" />
                   <g transform="translate(92 112) rotate(-90)">
                     <use href="#silla" />
@@ -358,8 +342,8 @@
                   <rect x="25" y="212" width="23" height="94" rx="2" fill="url(#madera)" />
                   <rect x="25" y="216" width="4" height="86" fill="url(#espejo)" />
                   <ellipse cx="38" cy="258" rx="5.5" ry="8" fill="#dde2e4" stroke="#a7b0b3" />
-                  <circle cx="38" cy="226" r="2.6" fill="#c8a35a" />
-                  <circle cx="38" cy="234" r="2.6" fill="#7a2430" />
+                  <circle cx="38" cy="226" r="2.6" fill="#e3d6bd" />
+                  <circle cx="38" cy="234" r="2.6" fill="#1c3152" />
                   <rect x="34" y="282" width="8" height="15" rx="3" fill="#2b2420" />
                   <g transform="translate(92 258) rotate(-90)">
                     <use href="#silla" />
@@ -377,8 +361,8 @@
                   <rect x="352" y="66" width="23" height="94" rx="2" fill="url(#madera)" />
                   <rect x="371" y="70" width="4" height="86" fill="url(#espejo)" />
                   <ellipse cx="362" cy="112" rx="5.5" ry="8" fill="#dde2e4" stroke="#a7b0b3" />
-                  <circle cx="362" cy="80" r="2.6" fill="#c8a35a" />
-                  <circle cx="362" cy="88" r="2.6" fill="#2f5e52" />
+                  <circle cx="362" cy="80" r="2.6" fill="#e3d6bd" />
+                  <circle cx="362" cy="88" r="2.6" fill="#2a4166" />
                   <rect x="358" y="136" width="8" height="15" rx="3" fill="#2b2420" />
                   <g transform="translate(308 112) rotate(90)">
                     <use href="#silla" />
@@ -393,19 +377,19 @@
                 <use href="#planta" x="170" y="562" />
 
                 <!-- Sala de espera: sofá capitoné contra la pared derecha y mesa de centro -->
-                <rect x="334" y="216" width="41" height="13" rx="5" fill="#1d473c" />
-                <rect x="334" y="431" width="41" height="13" rx="5" fill="#1d473c" />
+                <rect x="334" y="216" width="41" height="13" rx="5" fill="#22385c" />
+                <rect x="334" y="431" width="41" height="13" rx="5" fill="#22385c" />
                 <rect x="359" y="227" width="16" height="206" rx="3" fill="url(#capitone)" />
-                <rect x="337" y="231" width="24" height="64" rx="4" fill="#25594b" />
-                <rect x="337" y="299" width="24" height="64" rx="4" fill="#25594b" />
-                <rect x="337" y="367" width="24" height="62" rx="4" fill="#25594b" />
+                <rect x="337" y="231" width="24" height="64" rx="4" fill="#2e4a75" />
+                <rect x="337" y="299" width="24" height="64" rx="4" fill="#2e4a75" />
+                <rect x="337" y="367" width="24" height="62" rx="4" fill="#2e4a75" />
                 <rect x="290" y="294" width="28" height="74" rx="4" fill="url(#madera)" />
                 <rect
                   x="295"
                   y="302"
                   width="14"
                   height="19"
-                  fill="#efe6d3"
+                  fill="#f5f2ec"
                   transform="rotate(-8 302 311)"
                 />
                 <rect
@@ -413,7 +397,7 @@
                   y="326"
                   width="14"
                   height="19"
-                  fill="#7a2430"
+                  fill="#1c3152"
                   transform="rotate(6 306 335)"
                 />
                 <circle cx="304" cy="356" r="4.5" fill="#f3efe6" stroke="#c9c2b4" />
@@ -482,7 +466,7 @@
                 <path
                   d="M140 40H20V330H150V580H380V40H240"
                   fill="none"
-                  stroke="#2a2320"
+                  stroke="#0b1626"
                   stroke-width="11"
                   stroke-linejoin="miter"
                   stroke-linecap="square"
@@ -490,7 +474,7 @@
                 <path
                   d="M150 333H222V375M222 410V440H150"
                   fill="none"
-                  stroke="#2a2320"
+                  stroke="#0b1626"
                   stroke-width="6"
                   stroke-linecap="square"
                 />

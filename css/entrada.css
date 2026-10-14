@@ -1,6 +1,6 @@
 /* ---------- Preloader sello BWL & SOFT ("ola difuminada") ----------
    Tiempos: texto entra 0,1–1,3 s · texto sale 1,7 s · ola 1,45–2,95 s · velo sale 2,85 s (0,9 s).
-   Colores de Barber Mafia: paño verde de fondo y una ola de latón que se apaga en sangre de buey. */
+   Colores de Barber Mafia: azul de noche de fondo y una ola blanca y hueso que se apaga en azul. */
 @property --borde {
   syntax: '<percentage>';
   inherits: true;
@@ -8,16 +8,16 @@
 }
 
 :root {
-  --pre-fondo-claro: #1f463c;
-  --pre-fondo: #0b1f1b;
-  --pre-texto: #efe6d3;
-  --pre-tenue: #b9b29f;
-  --pre-acento-claro: #e4c98a;
-  --pre-acento: #c8a35a;
-  --pre-acento-oscuro: #5e1a23;
-  --pre-ola-centro: #fff4dc;
-  --pre-resplandor-frio: rgb(111 191 160 / 0.16);
-  --pre-resplandor-calido: rgb(200 163 90 / 0.24);
+  --pre-fondo-claro: #1d3352;
+  --pre-fondo: #07101e;
+  --pre-texto: #ffffff;
+  --pre-tenue: #a8b5c8;
+  --pre-acento-claro: #f4ede0;
+  --pre-acento: #e3d6bd;
+  --pre-acento-oscuro: #1c3152;
+  --pre-ola-centro: #ffffff;
+  --pre-resplandor-frio: rgb(110 150 215 / 0.2);
+  --pre-resplandor-calido: rgb(227 214 189 / 0.18);
   --pre-curva: cubic-bezier(0.22, 1, 0.36, 1);
   --pre-fuente-mono: ui-monospace, 'JetBrains Mono', 'Cascadia Mono', monospace;
 }
