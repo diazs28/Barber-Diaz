@@ -12,7 +12,7 @@ export const MARCA = {
   ciudad: 'Popayán', // TODO cliente
   direccion: 'Calle 5 # 8-24, Centro', // TODO cliente
   // Solo dígitos, con indicativo 57 y sin "+" ni espacios.
-  whatsapp: '573000000000', // TODO cliente
+  whatsapp: '573209367458', // TODO cliente: número de Johan para pruebas; cambiar al de la barbería
   mensajeWhatsapp: 'Hola, Barber Mafia. Quiero agendar un corte.',
   correo: 'hola@barbermafia.co', // TODO cliente
   redes: {
