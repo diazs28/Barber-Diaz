@@ -1,4 +1,4 @@
-# Cabeceras para Cloudflare Pages / Netlify.
+# Cabeceras para Cloudflare Pages / Netlify. En Vercel se usan las de vercel.json (mantener iguales).
 # connect-src incluye www.googleapis.com para leer la disponibilidad con AGENDA.fuente = 'google'.
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self' https://www.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
