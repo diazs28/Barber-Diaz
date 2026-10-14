@@ -45,41 +45,48 @@ export const SERVICIOS = [
 ];
 
 // La silla corresponde al puesto del plano (ver index.html, data-silla).
-// descansa: días sin turno (0 = domingo). almuerzo: pausa diaria.
-// calendarioId: ID del Google Calendar del barbero (solo con AGENDA.fuente = 'google').
-// TODO cliente: nombres, apodos, especialidades y turnos reales.
+// apodo: opcional ('' = sin apodo). descansa: días sin turno (0 = domingo). almuerzo: pausa diaria.
+// calendarioId: ID del Google Calendar del barbero (lo lee AGENDA.fuente = 'google').
+// TODO cliente: calendarios de PRUEBA (cuenta de Johan). Al vender la landing se cambian por los
+// calendarios de la cuenta de Google del negocio, junto con nombres, especialidades y turnos reales.
 export const BARBEROS = [
   {
-    id: 'andres',
+    id: 'alexander',
     silla: 1,
-    nombre: 'Andrés',
-    apodo: 'El Don',
-    especialidad: 'Cortes clásicos y a tijera',
+    nombre: 'Alexander',
+    apodo: '',
+    especialidad: 'Cortes clásicos y a tijera', // TODO cliente
     descansa: [1],
     almuerzo: ['12:00', '13:00'],
-    calendarioId: '',
+    calendarioId:
+      'c_6cc62c111768f4c29e004f39bd67db4bc2e1d339816e741441735fea0b7c0d64@group.calendar.google.com',
   },
   {
-    id: 'camilo',
+    id: 'david',
     silla: 2,
-    nombre: 'Camilo',
-    apodo: 'Navaja',
-    especialidad: 'Barba, perfilado y afeitado con navaja',
+    nombre: 'David',
+    apodo: '',
+    especialidad: 'Barba, perfilado y afeitado con navaja', // TODO cliente
     descansa: [2],
     almuerzo: ['13:00', '14:00'],
-    calendarioId: '',
+    calendarioId:
+      'c_568a641cf31cfeb3a8063e735a4b0264cc82647d338e0d3b929644b3ca5f6ef4@group.calendar.google.com',
   },
   {
-    id: 'julian',
+    id: 'x',
     silla: 3,
-    nombre: 'Julián',
-    apodo: 'El Capo',
-    especialidad: 'Fade, degradados y diseños',
+    nombre: 'X', // TODO cliente: nombre real del barbero de la silla 3
+    apodo: '',
+    especialidad: 'Fade, degradados y diseños', // TODO cliente
     descansa: [0],
     almuerzo: ['14:00', '15:00'],
-    calendarioId: '',
+    calendarioId:
+      'c_34e0e29c34adb8418e3fd717b536aea52ce71a649a36cf5b99af7b5dc388ef62@group.calendar.google.com',
   },
 ];
+
+// "Andrés “El Don”" o solo "Andrés" si no tiene apodo
+export const nombreBarbero = (b) => (b.apodo ? `${b.nombre} “${b.apodo}”` : b.nombre);
 
 export const AGENDA = {
   // 'demo': ocupación de ejemplo (siempre la misma para cada día).
