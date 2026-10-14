@@ -123,7 +123,7 @@ function pintarDias() {
         marcada: f === estado.fecha,
         deshabilitada: !n,
         clase: 'opcion-dia',
-        etiqueta: `${fechaLarga(f)}: ${descansa ? `${b.nombre} descansa` : n ? `${n} ${n === 1 ? 'hora libre' : 'horas libres'}` : 'sin horas libres'}`,
+        etiqueta: `${encabezado} ${numeroDia(f)}, ${fechaLarga(f)}: ${descansa ? `${b.nombre} descansa` : n ? `${n} ${n === 1 ? 'hora libre' : 'horas libres'}` : 'sin horas libres'}`,
         contenido: [
           span('opcion-dia__semana', encabezado),
           span('opcion-dia__numero', String(numeroDia(f))),
@@ -238,13 +238,14 @@ export function actualizarReserva({ ocupacion, estados, error, datosNuevos }) {
   }
 }
 
-function enlaceCalendario(b, servicio, inicio) {
+// Plantilla de evento de Google Calendar con la hora y la duración del servicio
+function enlaceCalendario(inicio, servicio, { titulo, detalles }) {
   const fin = sumarMinutos(inicio, servicio.minutos);
   const params = new URLSearchParams({
     action: 'TEMPLATE',
-    text: `${servicio.nombre} en ${MARCA.nombre}`,
+    text: titulo,
     dates: `${formatoGoogle(inicio)}/${formatoGoogle(fin)}`,
-    details: `Con ${b.nombre} “${b.apodo}”, silla ${b.silla}. Cita sujeta a confirmación por WhatsApp.`,
+    details: detalles,
     location: `${MARCA.direccion}, ${MARCA.ciudad}`,
     ctz: 'America/Bogota',
   });
@@ -277,13 +278,27 @@ function enviar(evento) {
     `• Servicio: ${servicio.nombre} (${servicio.minutos} min, ${formatearCop(servicio.precio)})`,
     `• Día: ${cuando}`,
     '¿Me confirman, por favor?',
+    '',
+    // La barbería toca este enlace, guarda el evento y esa hora queda ocupada en la página
+    `Para la barbería, apartar en el calendario de ${b.nombre}: ${enlaceCalendario(
+      inicio,
+      servicio,
+      {
+        titulo: `${servicio.nombre} · ${nombre}`,
+        detalles: `Reserva desde la página web. Cliente: ${nombre}. Silla ${b.silla}.`,
+      },
+    )}`,
   ].join('\n');
   const whatsapp = enlaceWhatsapp(mensaje);
   window.open(whatsapp, '_blank', 'noopener');
 
   el.resumen.textContent = `${servicio.nombre} con ${b.nombre} “${b.apodo}”, ${cuando}.`;
   el.whatsapp.href = whatsapp;
-  el.calendario.href = enlaceCalendario(b, servicio, inicio);
+  // Sin el nombre: este enlace es para el calendario personal del cliente
+  el.calendario.href = enlaceCalendario(inicio, servicio, {
+    titulo: `${servicio.nombre} en ${MARCA.nombre}`,
+    detalles: `Con ${b.nombre} “${b.apodo}”, silla ${b.silla}. Cita sujeta a confirmación por WhatsApp.`,
+  });
   el.form.hidden = true;
   el.listo.hidden = false;
   el.listo.focus();
