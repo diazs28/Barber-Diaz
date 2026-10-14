@@ -3,7 +3,7 @@
 // se mueve el contador y se limpia. Al empezar la salida emite "bwl:intro-fin" para el hero.
 (function () {
   'use strict';
-  const CLAVE = 'barbermafia:intro';
+  const CLAVE = 'magiabarber:intro';
   const SALIDA_MS = 2850;
   const FIN_MS = 3750;
   const raiz = document.documentElement;

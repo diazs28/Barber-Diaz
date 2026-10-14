@@ -1,7 +1,7 @@
 // ÚNICA fuente de los datos de marca, barberos, servicios y agenda.
 // Todo dato no confirmado por el cliente va marcado con TODO cliente.
 export const MARCA = {
-  nombre: 'Barber Mafia',
+  nombre: 'Magia Barber',
   eslogan: 'Cortes de la vieja escuela. Tu silla, a tu hora.',
   descripcion:
     'Barbería en el centro de Popayán. Mira en el plano qué barbero está libre y agenda tu corte en minutos.', // TODO cliente
@@ -13,7 +13,7 @@ export const MARCA = {
   direccion: 'Calle 5 # 8-24, Centro', // TODO cliente
   // Solo dígitos, con indicativo 57 y sin "+" ni espacios.
   whatsapp: '573209367458', // TODO cliente: número de Johan para pruebas; cambiar al de la barbería
-  mensajeWhatsapp: 'Hola, Barber Mafia. Quiero agendar un corte.',
+  mensajeWhatsapp: 'Hola, Magia Barber. Quiero agendar un corte.',
   correo: 'hola@barbermafia.co', // TODO cliente
   redes: {
     instagram: '', // TODO cliente: URL completa del perfil

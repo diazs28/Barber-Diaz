@@ -1,5 +1,6 @@
-/* Barber Mafia — azul oscuro de noche, blanco de barbería clásica y hueso de papel y cuero.
-   La lámpara colgante es el motivo: ilumina el inicio y enciende las sillas libres del plano. */
+/* Magia Barber — azul oscuro de noche, blanco de barbería clásica y hueso de papel y cuero.
+   Inicio futurista: el barbero cortando dentro de órbitas que giran; en el plano, la lámpara
+   enciende las sillas libres. */
 
 :root {
   /* Color */
@@ -75,90 +76,6 @@ body {
   top: var(--space-sm);
 }
 
-/* ---------- Cabecera ---------- */
-.cabecera {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  background: color-mix(in srgb, var(--azul-hondo) 90%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--linea);
-}
-.cabecera__fila {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 4rem;
-}
-.marca {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.45rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-.marca__poste {
-  width: 11px;
-  height: 26px;
-}
-.menu-boton {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  color: var(--blanco);
-}
-.menu-boton__icono {
-  display: block;
-  width: 22px;
-  height: 14px;
-  background:
-    linear-gradient(currentColor 0 0) top / 100% 2px no-repeat,
-    linear-gradient(currentColor 0 0) center / 100% 2px no-repeat,
-    linear-gradient(currentColor 0 0) bottom / 100% 2px no-repeat;
-}
-.menu {
-  display: none;
-  position: absolute;
-  inset: 4rem 0 auto;
-  flex-direction: column;
-  gap: var(--space-xs);
-  padding: var(--space-sm) 1rem var(--space-md);
-  background: var(--azul-hondo);
-  border-bottom: 1px solid var(--linea);
-}
-.menu.is-abierto {
-  display: flex;
-}
-.menu a {
-  padding-block: var(--space-xs);
-  font-weight: 500;
-  text-decoration: none;
-  text-underline-offset: 0.35em;
-}
-.menu a:hover {
-  color: var(--hueso-claro);
-  text-decoration: underline;
-}
-@media (min-width: 768px) {
-  .menu-boton {
-    display: none;
-  }
-  .menu {
-    display: flex;
-    position: static;
-    flex-direction: row;
-    gap: var(--space-lg);
-    padding: 0;
-    border: 0;
-    background: none;
-  }
-}
-
 /* ---------- Botones y enlaces ---------- */
 .boton {
   display: inline-flex;
@@ -204,26 +121,42 @@ body {
 /* ---------- 1. Inicio ---------- */
 .hero {
   position: relative;
-  padding-block: clamp(2rem, 1rem + 4vw, 4rem) clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
-  /* La lámpara colgante sobre el local */
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  min-height: min(100svh, 56rem);
+  padding-block: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
   background:
-    radial-gradient(ellipse 55% 70% at 18% -10%, rgb(244 237 224 / 0.14), transparent 70%),
-    radial-gradient(ellipse 80% 70% at 50% 120%, rgb(4 10 20 / 0.55), transparent 70%),
-    var(--azul-noche);
+    radial-gradient(ellipse 50% 60% at 78% 48%, rgb(80 130 220 / 0.24), transparent 70%),
+    radial-gradient(ellipse 45% 55% at 8% -5%, rgb(244 237 224 / 0.1), transparent 70%),
+    var(--azul-medianoche);
+}
+/* Rejilla técnica tenue que se desvanece hacia los bordes */
+.hero__fondo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(143 184 255 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(143 184 255 / 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 65% 70% at 72% 50%, #000 15%, transparent 75%);
+  mask-image: radial-gradient(ellipse 65% 70% at 72% 50%, #000 15%, transparent 75%);
 }
 .hero__rejilla {
+  position: relative;
   display: grid;
   gap: var(--space-lg);
+  align-items: center;
 }
 .hero__titulo {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: var(--fs-h1);
-  line-height: 0.82;
-  letter-spacing: 0;
+  font-size: clamp(4.4rem, 1.5rem + 11vw, 9.5rem);
+  line-height: 0.84;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
-  /* Letrero de vitrina: blanco y hueso con sombra en bloque azul */
-  filter: drop-shadow(0.035em 0.04em 0 var(--azul-sombra));
+  filter: drop-shadow(0 0 32px rgb(143 184 255 / 0.28));
 }
 .hero__mascara {
   display: block;
@@ -233,16 +166,15 @@ body {
 }
 .hero__linea {
   display: block;
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    var(--hueso-claro) 40%,
-    var(--hueso) 70%,
-    #c2b08e 100%
-  );
+  background: linear-gradient(180deg, #ffffff 0%, var(--hueso-claro) 45%, var(--hueso) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+/* La segunda palabra va solo con el contorno: el toque futurista */
+.hero__mascara + .hero__mascara .hero__linea {
+  background: none;
+  -webkit-text-stroke: 0.022em var(--hueso-claro);
 }
 .hero__resto {
   display: grid;
@@ -256,7 +188,7 @@ body {
   line-height: 1.35;
 }
 .hero__texto {
-  max-width: 52ch;
+  max-width: 50ch;
   margin-top: var(--space-sm);
   color: var(--gris-azul);
 }
@@ -267,16 +199,145 @@ body {
   margin-top: var(--space-lg);
 }
 
-.ahora {
+/* Escena: barbero cortando, órbitas que giran y puntos de luz */
+.escena {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 34rem);
+  margin: 0;
+}
+.escena__dibujo {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 30px 60px rgb(80 130 220 / 0.25));
+}
+.orbita {
+  fill: none;
+  stroke: #8fb8ff;
+  stroke-opacity: 0.38;
+  stroke-width: 1.2;
+  stroke-dasharray: 2 10;
+  transform-origin: 230px 250px;
+  animation: girar 40s linear infinite;
+}
+.orbita--b {
+  stroke: var(--hueso);
+  stroke-opacity: 0.4;
+  stroke-dasharray: 60 16 4 16;
+  animation-duration: 60s;
+  animation-direction: reverse;
+}
+/* Anillo ancho con franjas: el poste de barbería convertido en órbita */
+.orbita--poste {
+  stroke: #f5f2ec;
+  stroke-opacity: 0.1;
+  stroke-width: 7;
+  stroke-dasharray: 10 14;
+  animation-duration: 28s;
+}
+.orbita__satelite {
+  transform-origin: 230px 250px;
+  animation: girar 14s linear infinite;
+}
+.escena__vaiven {
+  transform-origin: 162px 452px;
+  animation: vaiven 5s ease-in-out infinite;
+}
+.tijera--a {
+  animation: cortar-a 0.9s ease-in-out infinite;
+}
+.tijera--b {
+  animation: cortar-b 0.9s ease-in-out infinite;
+}
+.escena__pelos path {
+  opacity: 0;
+  animation: caer 2s linear infinite;
+}
+.escena__pelos path:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.escena__pelos path:nth-child(3) {
+  animation-delay: 0.8s;
+}
+.escena__pelos path:nth-child(4) {
+  animation-delay: 1.2s;
+}
+.escena__pelos path:nth-child(5) {
+  animation-delay: 1.6s;
+}
+.escena__columna {
+  fill: none;
+  stroke: #eef4ff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1 9;
+  opacity: 0.85;
+}
+.escena__flujo {
+  fill: none;
+  stroke: #8fb8ff;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 30 300;
+  filter: url(#esc-brillo);
+  animation: fluir 2.8s linear infinite;
+}
+/* La línea de luz se mueve con el barbero y además recorre el brazo */
+.escena__flujo.escena__vaiven {
+  animation:
+    fluir 2.8s linear infinite,
+    vaiven 5s ease-in-out infinite;
+}
+.escena__nodos .nodo {
+  fill: #f5f8ff;
+}
+.escena__nodos .pulso {
+  fill: url(#esc-halo);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: latir 2.4s ease-in-out infinite;
+}
+.escena__nodos .pulso:nth-child(2n) {
+  animation-delay: 0.6s;
+}
+.escena__nodos .pulso:nth-child(3n) {
+  animation-delay: 1.2s;
+}
+
+/* Etiquetas flotantes de la escena */
+.escena__dato {
+  position: absolute;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.45rem 0.9rem;
-  border: 1px solid var(--linea);
+  gap: 0.55rem;
+  padding: 0.65rem 1.05rem;
+  border: 1px solid rgb(143 184 255 / 0.22);
   border-radius: 999px;
-  background: rgb(4 10 20 / 0.35);
-  font-size: var(--fs-sm);
+  background: rgb(10 22 40 / 0.72);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px -12px rgb(0 0 0 / 0.6);
+  color: var(--gris-azul);
+  font-size: 0.85rem;
   font-weight: 500;
+  white-space: nowrap;
+  animation: flotar 6s ease-in-out infinite;
+}
+.escena__dato b {
+  color: var(--blanco);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.escena__dato--a {
+  top: 6%;
+  left: -2%;
+  color: var(--blanco);
+}
+.escena__dato--b {
+  bottom: 9%;
+  right: -1%;
+  animation-delay: -3s;
 }
 .ahora__punto {
   width: 0.6rem;
@@ -284,13 +345,71 @@ body {
   border-radius: 50%;
   background: var(--gris-turno);
 }
-.ahora[data-estado='libre'] .ahora__punto {
+[data-ahora][data-estado='libre'] .ahora__punto {
   background: var(--blanco);
   box-shadow: 0 0 0 0 rgb(244 237 224 / 0.6);
   animation: latido 2.2s ease-out infinite;
 }
-.ahora[data-estado='ocupado'] .ahora__punto {
+[data-ahora][data-estado='ocupado'] .ahora__punto {
   background: var(--rojo-vivo);
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes vaiven {
+  50% {
+    transform: rotate(-1.4deg) translateY(-2px);
+  }
+}
+@keyframes cortar-a {
+  50% {
+    transform: rotate(-14deg);
+  }
+}
+@keyframes cortar-b {
+  50% {
+    transform: rotate(14deg);
+  }
+}
+@keyframes caer {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(6px, 80px) rotate(40deg);
+  }
+}
+@keyframes fluir {
+  from {
+    stroke-dashoffset: 330;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes latir {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+}
+@keyframes flotar {
+  50% {
+    transform: translateY(-10px);
+  }
 }
 @keyframes latido {
   to {
@@ -311,13 +430,37 @@ body {
 
 @media (min-width: 960px) {
   .hero__rejilla {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    align-items: end;
-    gap: clamp(3rem, 6vw, 6rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
   }
-  .hero__resto {
-    padding-left: clamp(2rem, 4vw, 3.5rem);
-    border-left: 1px solid var(--linea);
+}
+@media (max-width: 959px) {
+  .escena {
+    width: min(100%, 27rem);
+  }
+}
+@media (max-width: 479px) {
+  .escena__dato {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  .escena__dato--a {
+    top: 0;
+    left: 0;
+  }
+  .escena__dato--b {
+    right: 0;
+    bottom: 4%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .escena *,
+  .escena__dato,
+  .ahora__punto {
+    animation: none !important;
+  }
+  .escena__pelos path {
+    opacity: 0.8;
   }
 }
 
@@ -943,12 +1086,6 @@ body {
 @media (min-width: 768px) {
   .pie__rejilla {
     grid-template-columns: 1.3fr 1fr 1fr;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ahora[data-estado='libre'] .ahora__punto {
-    animation: none;
   }
 }
 
