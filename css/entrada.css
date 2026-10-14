@@ -1,0 +1,253 @@
+/* ---------- Preloader sello BWL & SOFT ("ola difuminada") ----------
+   Tiempos: texto entra 0,1–1,3 s · texto sale 1,7 s · ola 1,45–2,95 s · velo sale 2,85 s (0,9 s).
+   Colores de Barber Mafia: paño verde de fondo y una ola de latón que se apaga en sangre de buey. */
+@property --borde {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: -70%;
+}
+
+:root {
+  --pre-fondo-claro: #1f463c;
+  --pre-fondo: #0b1f1b;
+  --pre-texto: #efe6d3;
+  --pre-tenue: #b9b29f;
+  --pre-acento-claro: #e4c98a;
+  --pre-acento: #c8a35a;
+  --pre-acento-oscuro: #5e1a23;
+  --pre-ola-centro: #fff4dc;
+  --pre-resplandor-frio: rgb(111 191 160 / 0.16);
+  --pre-resplandor-calido: rgb(200 163 90 / 0.24);
+  --pre-curva: cubic-bezier(0.22, 1, 0.36, 1);
+  --pre-fuente-mono: ui-monospace, 'JetBrains Mono', 'Cascadia Mono', monospace;
+}
+
+.bwl-entrada {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(90% 70% at 30% 15%, var(--pre-fondo-claro) 0%, var(--pre-fondo) 70%);
+  animation: bwl-entrada-fuera 0.9s 2.85s var(--pre-curva) forwards;
+}
+html.bwl-intro .bwl-entrada {
+  display: grid;
+}
+html.bwl-intro-bloqueo {
+  overflow: hidden;
+}
+.bwl-entrada__fondo {
+  position: absolute;
+  inset: 0;
+}
+/* Dos resplandores difuminados que derivan despacio: el fondo no es plano */
+.bwl-entrada__fondo::before,
+.bwl-entrada__fondo::after {
+  content: '';
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  animation: bwl-entrada-derivar 4s ease-in-out infinite alternate;
+}
+.bwl-entrada__fondo::before {
+  width: 46vmax;
+  height: 46vmax;
+  left: -12vmax;
+  top: -10vmax;
+  background: var(--pre-resplandor-frio);
+}
+.bwl-entrada__fondo::after {
+  width: 40vmax;
+  height: 40vmax;
+  right: -10vmax;
+  bottom: -14vmax;
+  background: var(--pre-resplandor-calido);
+  animation-direction: alternate-reverse;
+}
+.bwl-entrada__contenido {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding-inline: 1.5rem;
+  text-align: center;
+}
+.bwl-entrada__contador,
+.bwl-entrada__lema,
+.bwl-entrada__sello {
+  opacity: 0;
+  font-family: var(--pre-fuente-mono);
+  text-transform: uppercase;
+  animation:
+    bwl-entrada-texto-entra 0.9s 0.1s var(--pre-curva) forwards,
+    bwl-entrada-texto-sale 0.7s 1.75s var(--pre-curva) forwards;
+}
+.bwl-entrada__contador {
+  font-size: 0.875rem;
+  letter-spacing: 0.55em;
+  color: var(--pre-acento-claro);
+}
+.bwl-entrada__lema {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--pre-tenue);
+  animation-delay: 0.55s, 1.8s;
+}
+.bwl-entrada__sello {
+  position: absolute;
+  inset: auto 0 1.5rem;
+  z-index: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--pre-tenue);
+  animation-delay: 0.8s, 1.85s;
+}
+.bwl-entrada__nombre {
+  margin: 0;
+  font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(2.8rem, 12vw, 7rem);
+  line-height: 1;
+  padding-bottom: 0.08em;
+  background: linear-gradient(
+    180deg,
+    var(--pre-texto) 15%,
+    var(--pre-acento-claro) 70%,
+    var(--pre-acento) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  animation:
+    bwl-entrada-nombre-entra 1.1s 0.2s var(--pre-curva) forwards,
+    bwl-entrada-texto-sale 0.75s 1.7s var(--pre-curva) forwards;
+}
+.bwl-entrada__linea {
+  display: block;
+  width: 11rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pre-acento-claro), transparent);
+  transform: scaleX(0);
+  animation:
+    bwl-entrada-linea 1.1s 0.55s cubic-bezier(0.65, 0, 0.35, 1) forwards,
+    bwl-entrada-texto-sale 0.7s 1.75s var(--pre-curva) forwards;
+}
+.bwl-entrada__ola,
+.bwl-entrada__brillo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    130% 100% at 85% 100%,
+    var(--pre-ola-centro) 0%,
+    var(--pre-acento-claro) 30%,
+    var(--pre-acento) 60%,
+    var(--pre-acento-oscuro) 100%
+  );
+  animation: bwl-entrada-ola 1.5s 1.45s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+/* Borde de la ola: de opaco a transparente en un 45 % de la pantalla, sin escalones */
+.bwl-entrada__ola {
+  -webkit-mask-image: linear-gradient(
+    to top left,
+    #000 var(--borde),
+    transparent calc(var(--borde) + 45%)
+  );
+  mask-image: linear-gradient(to top left, #000 var(--borde), transparent calc(var(--borde) + 45%));
+}
+/* Brillo que va por delante de la ola, más difuminado */
+.bwl-entrada__brillo {
+  opacity: 0.55;
+  filter: blur(40px);
+  -webkit-mask-image: linear-gradient(
+    to top left,
+    #000 calc(var(--borde) + 18%),
+    transparent calc(var(--borde) + 80%)
+  );
+  mask-image: linear-gradient(
+    to top left,
+    #000 calc(var(--borde) + 18%),
+    transparent calc(var(--borde) + 80%)
+  );
+}
+
+@keyframes bwl-entrada-texto-entra {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+@keyframes bwl-entrada-nombre-entra {
+  from {
+    opacity: 0;
+    filter: blur(16px);
+    letter-spacing: 0.35em;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: 0.01em;
+    transform: none;
+  }
+}
+@keyframes bwl-entrada-texto-sale {
+  from {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    filter: blur(16px);
+    transform: scale(1.06);
+  }
+}
+@keyframes bwl-entrada-linea {
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes bwl-entrada-ola {
+  from {
+    --borde: -70%;
+  }
+  to {
+    --borde: 115%;
+  }
+}
+@keyframes bwl-entrada-derivar {
+  to {
+    transform: translate(6vmax, 4vmax) scale(1.12);
+  }
+}
+@keyframes bwl-entrada-fuera {
+  from {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    filter: blur(26px);
+    transform: scale(1.04);
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bwl-entrada {
+    display: none !important;
+  }
+}

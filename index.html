@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Barber Mafia | Agenda tu corte en Popayán</title>
+    <meta
+      name="description"
+      content="Barbería en el centro de Popayán. Mira en el plano qué barbero está libre y agenda tu corte en minutos."
+    />
+    <meta name="theme-color" content="#13302a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content="Barber Mafia | Agenda tu corte en Popayán" />
+    <meta
+      property="og:description"
+      content="Elige tu barbero en el plano del local, mira sus horas libres y aparta tu turno sin hacer fila."
+    />
+    <meta property="og:image" content="assets/images/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Instrument+Sans:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/entrada.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Sin defer: decide antes de pintar si se muestra el preloader -->
+    <script src="js/intro.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    ></script>
+    <script type="module" src="js/main.js"></script>
+    <script defer src="js/animation.js"></script>
+  </head>
+  <body>
+    <!-- Preloader sello BWL & SOFT: solo se ve si js/intro.js activa la clase "bwl-intro" en <html> -->
+    <div class="bwl-entrada" data-bwl-entrada aria-hidden="true">
+      <div class="bwl-entrada__fondo"></div>
+      <div class="bwl-entrada__contenido">
+        <span class="bwl-entrada__contador" data-bwl-contador data-desde="2019">2019</span>
+        <p class="bwl-entrada__nombre" data-marca="nombre">Barber Mafia</p>
+        <span class="bwl-entrada__linea"></span>
+        <span class="bwl-entrada__lema" data-marca="lema">Barbería · Popayán</span>
+      </div>
+      <div class="bwl-entrada__brillo"></div>
+      <div class="bwl-entrada__ola"></div>
+      <p class="bwl-entrada__sello" data-marca="creditoDesarrollo">
+        Experiencia digital · BWL &amp; SOFT
+      </p>
+    </div>
+
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <header class="cabecera">
+      <div class="contenedor cabecera__fila">
+        <a class="marca" href="#inicio">
+          <svg class="marca__poste" viewBox="0 0 14 32" width="11" height="26" aria-hidden="true">
+            <defs>
+              <clipPath id="poste-recorte">
+                <rect x="2" y="4" width="10" height="24" rx="2" />
+              </clipPath>
+            </defs>
+            <g clip-path="url(#poste-recorte)">
+              <rect x="2" y="4" width="10" height="24" fill="#efe6d3" />
+              <path
+                d="M-2 12 16 2v5L-2 17Zm0 10L16 12v5L-2 27Zm0 10L16 22v5L-2 37Z"
+                fill="#7a2430"
+              />
+            </g>
+            <rect x="0" y="0" width="14" height="5" rx="2.5" fill="#c8a35a" />
+            <rect x="0" y="27" width="14" height="5" rx="2.5" fill="#c8a35a" />
+          </svg>
+          <span data-marca="nombre">Barber Mafia</span>
+        </a>
+        <button
+          class="menu-boton"
+          type="button"
+          aria-expanded="false"
+          aria-controls="menu"
+          data-menu-boton
+        >
+          <span class="sr-only">Abrir menú</span>
+          <span class="menu-boton__icono" aria-hidden="true"></span>
+        </button>
+        <nav id="menu" class="menu" aria-label="Principal" data-menu>
+          <a href="#inicio">Inicio</a>
+          <a href="#agenda">Agenda tu silla</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido">
+      <!-- 1. Inicio: información del local -->
+      <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+        <div class="contenedor hero__rejilla">
+          <div class="hero__principal">
+            <h1 class="hero__titulo" id="hero-titulo" data-titulo-marca>
+              <span class="hero__mascara"><span class="hero__linea">Barber</span></span>
+              <span class="hero__mascara"><span class="hero__linea">Mafia</span></span>
+            </h1>
+            <div class="hero__resto" data-anim="hero-resto">
+              <p class="hero__eslogan" data-marca="eslogan"></p>
+              <p class="hero__texto" data-marca="presentacion"></p>
+              <div class="hero__acciones">
+                <a class="boton" href="#agenda">Agenda tu silla</a>
+                <a
+                  class="boton boton--borde"
+                  data-enlace="whatsapp"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Escríbenos por WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__casa">
+            <p class="ahora" data-ahora data-estado="cargando" aria-live="polite">
+              <span class="ahora__punto" aria-hidden="true"></span>
+              <span data-ahora-texto>Consultando las sillas…</span>
+            </p>
+            <dl class="datos">
+              <div class="datos__fila">
+                <dt>Dirección</dt>
+                <dd>
+                  <span data-marca="direccion"></span>, <span data-marca="ciudad"></span>
+                  <a class="enlace" data-enlace="mapa" href="#" target="_blank" rel="noopener"
+                    >Cómo llegar</a
+                  >
+                </dd>
+              </div>
+              <div class="datos__fila">
+                <dt>Horario</dt>
+                <dd><ul class="horario" data-horario role="list"></ul></dd>
+              </div>
+            </dl>
+            <h2 class="carta__titulo">Servicios</h2>
+            <ul class="carta" data-carta role="list"></ul>
+            <p class="carta__nota">Precios de referencia. Pagas en el local al terminar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Plano 2D del local y reserva -->
+      <section class="agenda" id="agenda" aria-labelledby="agenda-titulo">
+        <div class="contenedor">
+          <div class="agenda__cabeza">
+            <h2 class="agenda__titulo" id="agenda-titulo">Agenda tu silla</h2>
+            <p class="agenda__intro">
+              Así es el local visto desde arriba. Toca el puesto de un barbero para ver sus horas
+              libres de esta semana y reservar.
+            </p>
+            <ul class="leyenda" role="list">
+              <li>
+                <span class="leyenda__marca" data-estado="libre" aria-hidden="true"></span>Libre
+                ahora
+              </li>
+              <li>
+                <span class="leyenda__marca" data-estado="ocupado" aria-hidden="true"></span
+                >Atendiendo
+              </li>
+              <li>
+                <span class="leyenda__marca" data-estado="fuera" aria-hidden="true"></span>Fuera de
+                turno
+              </li>
+            </ul>
+          </div>
+
+          <div class="agenda__rejilla">
+            <div class="plano">
+              <svg
+                class="plano__dibujo"
+                viewBox="0 0 400 600"
+                role="img"
+                aria-labelledby="plano-titulo plano-desc"
+              >
+                <title id="plano-titulo">Plano del local de Barber Mafia</title>
+                <desc id="plano-desc">
+                  Vista desde arriba. La entrada da a la calle. A la izquierda de la entrada está la
+                  silla 2 y a la derecha la silla 3; la silla 1 queda debajo de la silla 2. La sala
+                  de espera va contra la pared derecha. Al fondo están el baño, a la izquierda, y la
+                  vitrina con la caja.
+                </desc>
+                <defs>
+                  <pattern
+                    id="baldosa"
+                    width="16"
+                    height="16"
+                    patternUnits="userSpaceOnUse"
+                    patternTransform="rotate(45)"
+                  >
+                    <rect width="16" height="16" fill="#e8dfca" />
+                    <rect width="8" height="8" fill="#cfc2a4" />
+                    <rect x="8" y="8" width="8" height="8" fill="#cfc2a4" />
+                  </pattern>
+                  <pattern id="baldosa-bano" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <rect width="8" height="8" fill="#dfe5e3" />
+                    <path d="M8 0H0V8" fill="none" stroke="#c4cdca" stroke-width="0.8" />
+                  </pattern>
+                  <pattern id="cuadricula" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <rect width="20" height="20" fill="#163630" />
+                    <path d="M20 0H0V20" fill="none" stroke="#1f4239" stroke-width="0.7" />
+                  </pattern>
+                  <pattern id="toldo" width="12" height="12" patternUnits="userSpaceOnUse">
+                    <rect width="6" height="12" fill="#7a2430" />
+                    <rect x="6" width="6" height="12" fill="#efe6d3" />
+                  </pattern>
+                  <pattern id="capitone" width="7" height="9" patternUnits="userSpaceOnUse">
+                    <rect width="7" height="9" fill="#1b4439" />
+                    <circle cx="3.5" cy="4.5" r="1.1" fill="#0f2b24" />
+                  </pattern>
+                  <pattern id="productos" width="13" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="6.5" cy="6" r="3.4" fill="#c8a35a" />
+                    <circle cx="6.5" cy="15" r="3" fill="#2f5e52" />
+                  </pattern>
+                  <linearGradient id="madera" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#80583a" />
+                    <stop offset="1" stop-color="#583922" />
+                  </linearGradient>
+                  <linearGradient id="espejo" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#eef4f5" />
+                    <stop offset="0.5" stop-color="#9fb4b9" />
+                    <stop offset="1" stop-color="#e2ecee" />
+                  </linearGradient>
+                  <radialGradient id="luz-libre">
+                    <stop offset="0" stop-color="#ffe7a8" stop-opacity="0.95" />
+                    <stop offset="0.55" stop-color="#e4c98a" stop-opacity="0.45" />
+                    <stop offset="1" stop-color="#e4c98a" stop-opacity="0" />
+                  </radialGradient>
+                  <radialGradient id="luz-ocupado">
+                    <stop offset="0" stop-color="#f1b3a0" stop-opacity="0.7" />
+                    <stop offset="0.55" stop-color="#c4505b" stop-opacity="0.28" />
+                    <stop offset="1" stop-color="#c4505b" stop-opacity="0" />
+                  </radialGradient>
+                  <radialGradient id="penumbra" cx="0.5" cy="0.45" r="0.75">
+                    <stop offset="0.55" stop-color="#3a2a18" stop-opacity="0" />
+                    <stop offset="1" stop-color="#3a2a18" stop-opacity="0.28" />
+                  </radialGradient>
+
+                  <!-- Silla de barbero vista desde arriba; el frente (reposapiés) mira hacia -y -->
+                  <g id="silla">
+                    <circle r="16" fill="#2d3133" />
+                    <circle r="13.5" fill="#9aa2a6" />
+                    <rect x="-2" y="-27" width="4" height="10" fill="#8a9296" />
+                    <rect x="-10" y="-32" width="20" height="6" rx="2" fill="#c3c9cc" />
+                    <rect x="-18.5" y="-15" width="6.5" height="26" rx="3" fill="#4b141b" />
+                    <rect x="12" y="-15" width="6.5" height="26" rx="3" fill="#4b141b" />
+                    <rect x="-13" y="-18" width="26" height="28" rx="6" fill="#7a2430" />
+                    <rect x="-9" y="-14" width="18" height="17" rx="4" fill="#8f2e3a" />
+                    <rect x="-15" y="8" width="30" height="11" rx="4.5" fill="#5e1a23" />
+                    <rect x="-7.5" y="18" width="15" height="6.5" rx="3" fill="#47121a" />
+                  </g>
+                  <!-- Cliente sentado con la capa puesta -->
+                  <g id="cliente">
+                    <path d="M-15 -14 Q0 -24 15 -14 L16 6 Q0 14 -16 6 Z" fill="#ece9e2" />
+                    <path
+                      d="M-15 -14 Q0 -24 15 -14"
+                      fill="none"
+                      stroke="#cfcac0"
+                      stroke-width="1.2"
+                    />
+                    <circle cy="3" r="7.5" fill="#3b2a20" />
+                  </g>
+                  <!-- Barbero de pie -->
+                  <g id="barbero">
+                    <ellipse rx="12" ry="6.5" fill="#1d1a18" />
+                    <circle cy="-1" r="6" fill="#2c1f17" />
+                  </g>
+                  <!-- Planta en matera -->
+                  <g id="planta">
+                    <circle r="9" fill="#6b4a2f" />
+                    <g fill="#3f7a55">
+                      <ellipse cx="-4" cy="-3" rx="7" ry="3.6" transform="rotate(-30 -4 -3)" />
+                      <ellipse cx="4" cy="-4" rx="7" ry="3.6" transform="rotate(35 4 -4)" />
+                      <ellipse cx="-3" cy="5" rx="7" ry="3.6" transform="rotate(40 -3 5)" />
+                      <ellipse cx="5" cy="4" rx="7" ry="3.6" transform="rotate(-40 5 4)" />
+                    </g>
+                    <circle r="2.6" fill="#5c9b6f" />
+                  </g>
+                </defs>
+
+                <!-- Exterior y andén -->
+                <rect width="400" height="600" fill="url(#cuadricula)" />
+                <rect width="400" height="34" fill="#3a4843" />
+                <path d="M80 0V34M160 0V34M240 0V34M320 0V34" stroke="#2c3935" stroke-width="1" />
+                <rect
+                  x="128"
+                  y="3"
+                  width="124"
+                  height="14"
+                  rx="2"
+                  fill="url(#toldo)"
+                  opacity="0.92"
+                />
+                <text
+                  class="plano__rotulo plano__rotulo--claro"
+                  x="190"
+                  y="29"
+                  text-anchor="middle"
+                >
+                  Entrada
+                </text>
+
+                <!-- Piso -->
+                <path d="M20 40H380V580H150V330H20Z" fill="url(#baldosa)" />
+                <path d="M20 40H380V580H150V330H20Z" fill="url(#penumbra)" />
+
+                <!-- Tapete de entrada -->
+                <rect x="158" y="47" width="64" height="20" rx="2" fill="#6b4f35" />
+                <rect
+                  x="161"
+                  y="50"
+                  width="58"
+                  height="14"
+                  rx="1"
+                  fill="none"
+                  stroke="#8f7050"
+                  stroke-width="1"
+                />
+
+                <!-- Puesto 2: pared izquierda, junto a la entrada -->
+                <g class="puesto" data-silla="2" data-estado="cargando">
+                  <g class="puesto__lampara">
+                    <circle class="puesto__luz" cx="92" cy="112" r="64" />
+                  </g>
+                  <rect class="puesto__zona" x="24" y="56" width="134" height="120" rx="8" />
+                  <rect x="25" y="66" width="23" height="94" rx="2" fill="url(#madera)" />
+                  <rect x="25" y="70" width="4" height="86" fill="url(#espejo)" />
+                  <ellipse cx="38" cy="112" rx="5.5" ry="8" fill="#dde2e4" stroke="#a7b0b3" />
+                  <circle cx="38" cy="80" r="2.6" fill="#c8a35a" />
+                  <circle cx="38" cy="88" r="2.6" fill="#2f5e52" />
+                  <rect x="34" y="136" width="8" height="15" rx="3" fill="#2b2420" />
+                  <g transform="translate(92 112) rotate(-90)">
+                    <use href="#silla" />
+                    <use class="puesto__cliente" href="#cliente" />
+                    <use class="puesto__barbero" href="#barbero" y="38" />
+                  </g>
+                </g>
+
+                <!-- Puesto 1: pared izquierda, debajo del puesto 2 -->
+                <g class="puesto" data-silla="1" data-estado="cargando">
+                  <g class="puesto__lampara">
+                    <circle class="puesto__luz" cx="92" cy="258" r="64" />
+                  </g>
+                  <rect class="puesto__zona" x="24" y="198" width="134" height="122" rx="8" />
+                  <rect x="25" y="212" width="23" height="94" rx="2" fill="url(#madera)" />
+                  <rect x="25" y="216" width="4" height="86" fill="url(#espejo)" />
+                  <ellipse cx="38" cy="258" rx="5.5" ry="8" fill="#dde2e4" stroke="#a7b0b3" />
+                  <circle cx="38" cy="226" r="2.6" fill="#c8a35a" />
+                  <circle cx="38" cy="234" r="2.6" fill="#7a2430" />
+                  <rect x="34" y="282" width="8" height="15" rx="3" fill="#2b2420" />
+                  <g transform="translate(92 258) rotate(-90)">
+                    <use href="#silla" />
+                    <use class="puesto__cliente" href="#cliente" />
+                    <use class="puesto__barbero" href="#barbero" y="38" />
+                  </g>
+                </g>
+
+                <!-- Puesto 3: pared derecha, junto a la entrada -->
+                <g class="puesto" data-silla="3" data-estado="cargando">
+                  <g class="puesto__lampara">
+                    <circle class="puesto__luz" cx="308" cy="112" r="64" />
+                  </g>
+                  <rect class="puesto__zona" x="242" y="56" width="134" height="120" rx="8" />
+                  <rect x="352" y="66" width="23" height="94" rx="2" fill="url(#madera)" />
+                  <rect x="371" y="70" width="4" height="86" fill="url(#espejo)" />
+                  <ellipse cx="362" cy="112" rx="5.5" ry="8" fill="#dde2e4" stroke="#a7b0b3" />
+                  <circle cx="362" cy="80" r="2.6" fill="#c8a35a" />
+                  <circle cx="362" cy="88" r="2.6" fill="#2f5e52" />
+                  <rect x="358" y="136" width="8" height="15" rx="3" fill="#2b2420" />
+                  <g transform="translate(308 112) rotate(90)">
+                    <use href="#silla" />
+                    <use class="puesto__cliente" href="#cliente" />
+                    <use class="puesto__barbero" href="#barbero" y="38" />
+                  </g>
+                </g>
+
+                <!-- Plantas -->
+                <use href="#planta" x="38" y="187" />
+                <use href="#planta" x="362" y="196" />
+                <use href="#planta" x="170" y="562" />
+
+                <!-- Sala de espera: sofá capitoné contra la pared derecha y mesa de centro -->
+                <rect x="334" y="216" width="41" height="13" rx="5" fill="#1d473c" />
+                <rect x="334" y="431" width="41" height="13" rx="5" fill="#1d473c" />
+                <rect x="359" y="227" width="16" height="206" rx="3" fill="url(#capitone)" />
+                <rect x="337" y="231" width="24" height="64" rx="4" fill="#25594b" />
+                <rect x="337" y="299" width="24" height="64" rx="4" fill="#25594b" />
+                <rect x="337" y="367" width="24" height="62" rx="4" fill="#25594b" />
+                <rect x="290" y="294" width="28" height="74" rx="4" fill="url(#madera)" />
+                <rect
+                  x="295"
+                  y="302"
+                  width="14"
+                  height="19"
+                  fill="#efe6d3"
+                  transform="rotate(-8 302 311)"
+                />
+                <rect
+                  x="299"
+                  y="326"
+                  width="14"
+                  height="19"
+                  fill="#7a2430"
+                  transform="rotate(6 306 335)"
+                />
+                <circle cx="304" cy="356" r="4.5" fill="#f3efe6" stroke="#c9c2b4" />
+                <text
+                  class="plano__rotulo"
+                  x="0"
+                  y="0"
+                  text-anchor="middle"
+                  transform="translate(328 330) rotate(-90)"
+                >
+                  Sala de espera
+                </text>
+
+                <!-- Baño -->
+                <rect x="153" y="333" width="69" height="107" fill="url(#baldosa-bano)" />
+                <rect
+                  x="156"
+                  y="350"
+                  width="9"
+                  height="26"
+                  rx="2"
+                  fill="#f6f6f3"
+                  stroke="#b9c0c3"
+                />
+                <ellipse cx="177" cy="363" rx="12" ry="9.5" fill="#fbfbf9" stroke="#b9c0c3" />
+                <ellipse cx="178" cy="363" rx="7.5" ry="5.5" fill="#e1e7e9" />
+                <rect
+                  x="156"
+                  y="410"
+                  width="24"
+                  height="22"
+                  rx="3"
+                  fill="#f6f6f3"
+                  stroke="#b9c0c3"
+                />
+                <ellipse cx="168" cy="421" rx="7" ry="6" fill="#dde4e6" />
+                <text class="plano__rotulo" x="200" y="398" text-anchor="middle">WC</text>
+                <path d="M222 410H257" stroke="#6b4a2f" stroke-width="3" stroke-linecap="round" />
+                <path
+                  d="M257 410A35 35 0 0 0 222 375"
+                  fill="none"
+                  stroke="#8f8170"
+                  stroke-width="1"
+                  stroke-dasharray="3 3"
+                />
+
+                <!-- Vitrina de productos y caja -->
+                <rect x="186" y="488" width="184" height="60" rx="16" fill="url(#madera)" />
+                <rect
+                  x="194"
+                  y="495"
+                  width="132"
+                  height="46"
+                  rx="9"
+                  fill="#bfd3d6"
+                  opacity="0.35"
+                />
+                <rect x="198" y="497" width="124" height="42" fill="url(#productos)" />
+                <rect x="336" y="502" width="24" height="18" rx="2" fill="#2b2420" />
+                <rect x="339" y="505" width="18" height="9" rx="1" fill="#8fb3a8" />
+                <text class="plano__rotulo" x="278" y="564" text-anchor="middle">
+                  Vitrina y caja
+                </text>
+
+                <!-- Muros (encima del piso y el mobiliario) -->
+                <path
+                  d="M140 40H20V330H150V580H380V40H240"
+                  fill="none"
+                  stroke="#2a2320"
+                  stroke-width="11"
+                  stroke-linejoin="miter"
+                  stroke-linecap="square"
+                />
+                <path
+                  d="M150 333H222V375M222 410V440H150"
+                  fill="none"
+                  stroke="#2a2320"
+                  stroke-width="6"
+                  stroke-linecap="square"
+                />
+                <!-- Vitrinas a la calle y puerta corrediza de vidrio -->
+                <path d="M34 40H128M252 40H366" stroke="#a9c7cf" stroke-width="3.5" />
+                <rect x="140" y="37" width="54" height="3.5" fill="#a9c7cf" />
+                <rect x="186" y="40.5" width="54" height="3.5" fill="#a9c7cf" />
+              </svg>
+
+              <button class="silla-boton" type="button" data-silla="2" aria-pressed="false">
+                <span class="silla-boton__rotulo">
+                  <span class="silla-boton__numero" data-silla-numero>2</span>
+                  <span class="silla-boton__nombre" data-silla-nombre></span>
+                  <span class="silla-boton__estado" data-silla-estado>Consultando…</span>
+                </span>
+              </button>
+              <button class="silla-boton" type="button" data-silla="1" aria-pressed="false">
+                <span class="silla-boton__rotulo">
+                  <span class="silla-boton__numero" data-silla-numero>1</span>
+                  <span class="silla-boton__nombre" data-silla-nombre></span>
+                  <span class="silla-boton__estado" data-silla-estado>Consultando…</span>
+                </span>
+              </button>
+              <button class="silla-boton" type="button" data-silla="3" aria-pressed="false">
+                <span class="silla-boton__rotulo">
+                  <span class="silla-boton__numero" data-silla-numero>3</span>
+                  <span class="silla-boton__nombre" data-silla-nombre></span>
+                  <span class="silla-boton__estado" data-silla-estado>Consultando…</span>
+                </span>
+              </button>
+            </div>
+
+            <aside class="reserva" data-reserva aria-label="Reserva de cita">
+              <div class="reserva__vacio" data-reserva-vacio>
+                <p class="reserva__vacio-titulo">Elige una silla en el plano</p>
+                <p>
+                  Cada puesto muestra quién atiende y si está libre ahora. Al tocarlo verás sus
+                  horas libres de los próximos siete días.
+                </p>
+              </div>
+
+              <form class="reserva__form" data-reserva-form hidden novalidate>
+                <div class="reserva__barbero">
+                  <span class="reserva__inicial" data-barbero-inicial aria-hidden="true"></span>
+                  <div>
+                    <h3 class="reserva__nombre" data-barbero-nombre tabindex="-1"></h3>
+                    <p class="reserva__detalle" data-barbero-detalle></p>
+                    <p class="reserva__estado" data-barbero-estado></p>
+                  </div>
+                </div>
+
+                <fieldset class="paso">
+                  <legend class="paso__titulo">1. Servicio</legend>
+                  <div class="opciones-servicio" data-servicios></div>
+                </fieldset>
+
+                <fieldset class="paso">
+                  <legend class="paso__titulo">2. Día</legend>
+                  <div class="opciones-dia" data-dias></div>
+                </fieldset>
+
+                <fieldset class="paso">
+                  <legend class="paso__titulo">3. Hora</legend>
+                  <div class="opciones-hora" data-horas></div>
+                  <p class="paso__aviso" data-horas-aviso hidden></p>
+                </fieldset>
+
+                <div class="paso">
+                  <label class="paso__titulo" for="reserva-nombre">4. Tu nombre</label>
+                  <input
+                    class="campo"
+                    id="reserva-nombre"
+                    name="nombre"
+                    type="text"
+                    autocomplete="given-name"
+                    maxlength="60"
+                    required
+                    aria-describedby="reserva-error"
+                  />
+                </div>
+
+                <p
+                  class="reserva__error"
+                  id="reserva-error"
+                  data-reserva-error
+                  role="alert"
+                  hidden
+                ></p>
+                <button class="boton boton--bloque" type="submit">Reservar por WhatsApp</button>
+                <p class="reserva__nota">
+                  Se abre WhatsApp con tu reserva escrita. Tu turno queda apartado cuando la
+                  barbería te responda. Esta página no guarda tus datos.
+                </p>
+              </form>
+
+              <div class="reserva__listo" data-reserva-listo tabindex="-1" hidden>
+                <h3 class="reserva__nombre">Reserva enviada a WhatsApp</h3>
+                <p class="reserva__resumen" data-listo-resumen></p>
+                <p>Tu turno queda apartado cuando la barbería te responda por WhatsApp.</p>
+                <div class="reserva__acciones">
+                  <a class="boton" data-listo-calendario href="#" target="_blank" rel="noopener">
+                    Añadir a Google Calendar
+                  </a>
+                  <a class="enlace" data-listo-whatsapp href="#" target="_blank" rel="noopener">
+                    ¿No se abrió WhatsApp? Ábrelo aquí
+                  </a>
+                </div>
+                <button class="enlace reserva__otra" type="button" data-listo-otra>
+                  Hacer otra reserva
+                </button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 3. Pie de página: contactos -->
+    <footer class="pie" id="contacto">
+      <div class="contenedor">
+        <div class="pie__rejilla">
+          <div class="pie__marca">
+            <p class="pie__nombre" data-marca="nombre">Barber Mafia</p>
+            <p data-marca="eslogan"></p>
+          </div>
+          <div>
+            <h2 class="pie__titulo">Contacto</h2>
+            <ul class="pie__lista" role="list">
+              <li>
+                <span class="pie__etiqueta">WhatsApp</span>
+                <a data-enlace="whatsapp" data-telefono href="#" target="_blank" rel="noopener"></a>
+              </li>
+              <li>
+                <span class="pie__etiqueta">Correo</span>
+                <a data-enlace="correo" data-marca="correo" href="#"></a>
+              </li>
+              <li data-red="instagram">
+                <span class="pie__etiqueta">Instagram</span>
+                <a href="#" target="_blank" rel="noopener">Síguenos</a>
+              </li>
+              <li data-red="facebook">
+                <span class="pie__etiqueta">Facebook</span>
+                <a href="#" target="_blank" rel="noopener">Síguenos</a>
+              </li>
+              <li data-red="tiktok">
+                <span class="pie__etiqueta">TikTok</span>
+                <a href="#" target="_blank" rel="noopener">Síguenos</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="pie__titulo">Visítanos</h2>
+            <ul class="pie__lista" role="list">
+              <li>
+                <span class="pie__etiqueta">Dirección</span>
+                <span><span data-marca="direccion"></span>, <span data-marca="ciudad"></span></span>
+                <a class="enlace" data-enlace="mapa" href="#" target="_blank" rel="noopener"
+                  >Cómo llegar</a
+                >
+              </li>
+              <li>
+                <span class="pie__etiqueta">Horario</span>
+                <ul class="horario" data-horario role="list"></ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="pie__base">
+          <p>© <span data-anio></span> <span data-marca="nombre"></span></p>
+          <p>Sitio desarrollado por BWL &amp; SOFT</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
