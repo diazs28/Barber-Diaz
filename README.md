@@ -27,7 +27,7 @@ difuminada") con una ola blanca y hueso sobre azul.
 Todo está marcado con `TODO cliente` en [`js/config.js`](js/config.js).
 
 - Ciudad **Popayán**, dirección _Calle 5 # 8-24, Centro_ y año de apertura 2019: inventados.
-- WhatsApp `+57 300 000 0000` y correo `hola@barbermafia.co`: de ejemplo.
+- WhatsApp `+57 320 936 7458`: número de Johan para pruebas. Correo `hola@barbermafia.co`: de ejemplo.
 - Barberos: **Andrés "El Don"** (silla 1, descansa los lunes), **Camilo "Navaja"** (silla 2,
   descansa los martes) y **Julián "El Capo"** (silla 3, descansa los domingos). Nombres, apodos,
   especialidades, días de descanso y almuerzos son de ejemplo.

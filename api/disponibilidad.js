@@ -17,7 +17,8 @@ function error(status, code, message, extra = {}) {
 }
 
 export async function GET(request) {
-  const clave = process.env.GOOGLE_CALENDAR_API_KEY;
+  // Se limpian espacios, saltos de línea y comillas que se cuelan al pegar la clave en Vercel
+  const clave = process.env.GOOGLE_CALENDAR_API_KEY?.trim().replace(/^['"]|['"]$/g, '');
   if (!clave) {
     console.error('[disponibilidad] Falta la variable GOOGLE_CALENDAR_API_KEY');
     return error(503, 'AGENDA_NO_CONFIGURADA', 'La agenda no está disponible en este momento.');
@@ -56,8 +57,13 @@ export async function GET(request) {
     return error(502, 'GOOGLE_SIN_RESPUESTA', 'No pudimos consultar la agenda. Intenta de nuevo.');
   }
   if (!respuesta.ok) {
-    // Sin el cuerpo: podría repetir la URL con la clave
-    console.error('[disponibilidad] Google respondió', respuesta.status);
+    // Solo el motivo (p. ej. API_KEY_INVALID): el cuerpo completo podría repetir la URL con la clave
+    const detalle = await respuesta.json().catch(() => ({}));
+    console.error(
+      '[disponibilidad] Google respondió',
+      respuesta.status,
+      detalle.error?.details?.[0]?.reason ?? detalle.error?.errors?.[0]?.reason ?? 'sin motivo',
+    );
     return error(502, 'GOOGLE_ERROR', 'No pudimos consultar la agenda. Intenta de nuevo.');
   }
 
