@@ -3,7 +3,11 @@
 // Google Cloud, pegado completo). Nunca llega al navegador ni se imprime en los logs.
 import { createSign } from 'node:crypto';
 
-const ALCANCE = 'https://www.googleapis.com/auth/calendar.events';
+// calendar.events crea y lista citas; la consulta free/busy exige además calendar.freebusy
+export const ALCANCE = [
+  'https://www.googleapis.com/auth/calendar.events',
+  'https://www.googleapis.com/auth/calendar.freebusy',
+].join(' ');
 const API = 'https://www.googleapis.com/calendar/v3';
 let tokenEnCache = null;
 
