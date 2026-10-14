@@ -1,0 +1,10 @@
+# Archivos que no se publican en Vercel (solo sirven para desarrollo o documentación)
+scripts/
+docs/
+README.md
+.env.example
+_headers
+.prettierrc.json
+.prettierignore
+.editorconfig
+.gitattributes
