@@ -563,23 +563,27 @@
                   role="alert"
                   hidden
                 ></p>
-                <button class="boton boton--bloque" type="submit">Reservar por WhatsApp</button>
+                <button class="boton boton--bloque" type="submit" data-reserva-enviar>
+                  Reservar cita
+                </button>
                 <p class="reserva__nota">
-                  Se abre WhatsApp con tu reserva escrita. Tu turno queda apartado cuando la
-                  barbería te responda. Esta página no guarda tus datos.
+                  Tu cita queda guardada en la agenda del barbero. Al reservar aceptas que usemos tu
+                  nombre solo para atenderte.
                 </p>
               </form>
 
               <div class="reserva__listo" data-reserva-listo tabindex="-1" hidden>
-                <h3 class="reserva__nombre">Reserva enviada a WhatsApp</h3>
+                <h3 class="reserva__nombre">Cita reservada</h3>
                 <p class="reserva__resumen" data-listo-resumen></p>
-                <p>Tu turno queda apartado cuando la barbería te responda por WhatsApp.</p>
+                <p data-listo-detalle>
+                  Tu silla te espera. Si no puedes llegar, avísanos por WhatsApp para liberarla.
+                </p>
                 <div class="reserva__acciones">
-                  <a class="boton" data-listo-calendario href="#" target="_blank" rel="noopener">
-                    Añadir a Google Calendar
+                  <a class="boton" data-listo-whatsapp href="#" target="_blank" rel="noopener">
+                    Avisar por WhatsApp
                   </a>
-                  <a class="enlace" data-listo-whatsapp href="#" target="_blank" rel="noopener">
-                    ¿No se abrió WhatsApp? Ábrelo aquí
+                  <a class="enlace" data-listo-calendario href="#" target="_blank" rel="noopener">
+                    Añadir a mi Google Calendar
                   </a>
                 </div>
                 <button class="enlace reserva__otra" type="button" data-listo-otra>

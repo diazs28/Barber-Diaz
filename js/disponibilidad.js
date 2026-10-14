@@ -106,8 +106,9 @@ function ocupacionDemo(barbero, fecha) {
   return ocupados;
 }
 
-async function ocupacionGoogle(desde, dias) {
-  const respuesta = await fetch(`/api/disponibilidad?desde=${desde}&dias=${dias}`);
+async function ocupacionGoogle(desde, dias, fresco) {
+  const extra = fresco ? `&fresco=${Date.now()}` : '';
+  const respuesta = await fetch(`/api/disponibilidad?desde=${desde}&dias=${dias}${extra}`);
   const datos = await respuesta.json().catch(() => ({}));
   if (!respuesta.ok) {
     throw new Error(
@@ -123,9 +124,10 @@ async function ocupacionGoogle(desde, dias) {
   );
 }
 
-// Map<idBarbero, [{ inicio, fin }]> con los bloques ocupados desde "desde" durante "dias"
-export async function cargarOcupacion(desde, dias = AGENDA.diasVisibles) {
-  if (AGENDA.fuente === 'google') return ocupacionGoogle(desde, dias);
+// Map<idBarbero, [{ inicio, fin }]> con los bloques ocupados desde "desde" durante "dias".
+// fresco: true salta la caché de la CDN (después de reservar).
+export async function cargarOcupacion(desde, dias = AGENDA.diasVisibles, { fresco = false } = {}) {
+  if (AGENDA.fuente === 'google') return ocupacionGoogle(desde, dias, fresco);
   return new Map(
     BARBEROS.map((b) => [
       b.id,
