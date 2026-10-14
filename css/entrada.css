@@ -1,6 +1,6 @@
 /* ---------- Preloader sello BWL & SOFT ("ola difuminada") ----------
    Tiempos: texto entra 0,1–1,3 s · texto sale 1,7 s · ola 1,45–2,95 s · velo sale 2,85 s (0,9 s).
-   Colores de Barber Mafia: azul de noche de fondo y una ola blanca y hueso que se apaga en azul. */
+   Colores de Magia Barber: azul de noche de fondo y una ola blanca y hueso que se apaga en azul. */
 @property --borde {
   syntax: '<percentage>';
   inherits: true;

@@ -1,4 +1,4 @@
-// Arranque: datos de marca, menú móvil, horario del pie y agenda (plano + reserva).
+// Arranque: datos de marca, horario del pie y agenda (plano + reserva).
 import {
   AGENDA,
   BARBEROS,
@@ -68,23 +68,6 @@ const sello = document.querySelector('[data-marca="creditoDesarrollo"]');
 if (sello && !MARCA.creditoDesarrollo) sello.remove();
 
 document.title = `${MARCA.nombre} | Agenda tu corte en ${MARCA.ciudad}`;
-
-// 2. Menú móvil accesible
-const boton = document.querySelector('[data-menu-boton]');
-const menu = document.querySelector('[data-menu]');
-if (boton && menu) {
-  const cerrar = () => {
-    boton.setAttribute('aria-expanded', 'false');
-    menu.classList.remove('is-abierto');
-  };
-  boton.addEventListener('click', () => {
-    const abierto = boton.getAttribute('aria-expanded') === 'true';
-    boton.setAttribute('aria-expanded', String(!abierto));
-    menu.classList.toggle('is-abierto', !abierto);
-  });
-  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', cerrar));
-  document.addEventListener('keydown', (e) => e.key === 'Escape' && cerrar());
-}
 
 // 3. Año actual
 document.querySelectorAll('[data-anio]').forEach((el) => {

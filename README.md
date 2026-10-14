@@ -1,4 +1,4 @@
-# Barber Mafia — Landing de reservas
+# Magia Barber — Landing de reservas
 
 ## Descripción
 
@@ -92,13 +92,13 @@ Se configura una sola vez:
    Las cuentas de una universidad o empresa suelen bloquear el permiso de edición hacia fuera.
 2. En cada calendario, _Permisos de acceso_ → **Compartir públicamente** → **Ver solo
    libre/ocupado (ocultar detalles)**.
-3. En _Compartido con_ agrega `reservas-web@barber-diaz.iam.gserviceaccount.com` con
+3. En _Compartido con_ agrega `reservas-web@magiabarber.iam.gserviceaccount.com` con
    **Hacer cambios y ver todos los detalles del evento**. Agrega también a cada barbero, con
    _Hacer cambios en eventos_, en su propio calendario: así solo ellos y la página lo editan.
 4. Copia el **ID del calendario** (en _Integrar el calendario_) a
    [`api/_calendarios.js`](api/_calendarios.js) (la clave del objeto es el `id` del barbero en
    `js/config.js`).
-5. En Google Cloud (proyecto `barber-diaz`) → _IAM → Cuentas de servicio_ → `reservas-web` →
+5. En Google Cloud (proyecto `magiabarber`, cuenta magiabarber8@gmail.com) → _IAM → Cuentas de servicio_ → `reservas-web` →
    _Claves_ → _Agregar clave → JSON_. Pega el contenido del archivo en `GOOGLE_SERVICE_ACCOUNT_JSON`
    y borra el archivo descargado.
 
