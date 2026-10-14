@@ -1,5 +1,6 @@
-// Panel de reserva: barbero elegido → servicio → día → hora → nombre → mensaje de WhatsApp.
-// No se guarda ningún dato en la página: la cita la confirma la barbería por WhatsApp.
+// Panel de reserva: barbero elegido → servicio → día → hora → nombre → cita guardada.
+// Con AGENDA.fuente = 'google' la cita se crea en el calendario del barbero desde el servidor
+// (/api/reservas); el cliente nunca recibe enlaces ni permisos sobre ese calendario.
 import { AGENDA, BARBEROS, MARCA, SERVICIOS, enlaceWhatsapp, nombreBarbero } from './config.js';
 import { horariosDelDia, jornada } from './disponibilidad.js';
 import { formatearCop } from './formato.js';
@@ -35,6 +36,8 @@ const el = {
   resumen: $('[data-listo-resumen]'),
   calendario: $('[data-listo-calendario]'),
   whatsapp: $('[data-listo-whatsapp]'),
+  enviar: $('[data-reserva-enviar]'),
+  listoDetalle: $('[data-listo-detalle]'),
 };
 
 const estado = {
@@ -45,6 +48,8 @@ const estado = {
   ocupacion: null,
   estados: null,
   error: false,
+  clave: null, // Idempotency-Key del intento en curso: un reintento no duplica la cita
+  alCambiarAgenda: () => {},
 };
 
 const barberoActual = () => BARBEROS.find((b) => b.id === estado.barbero);
@@ -252,7 +257,23 @@ function enlaceCalendario(inicio, servicio, { titulo, detalles }) {
   return `https://calendar.google.com/calendar/render?${params}`;
 }
 
-function enviar(evento) {
+async function guardarCita(datos) {
+  if (AGENDA.fuente !== 'google') return { demo: true };
+  const respuesta = await fetch('/api/reservas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Idempotency-Key': estado.clave },
+    body: JSON.stringify(datos),
+  });
+  const cuerpo = await respuesta.json().catch(() => ({}));
+  if (!respuesta.ok) {
+    const fallo = new Error(cuerpo.error?.message ?? 'No pudimos guardar la cita.');
+    fallo.code = cuerpo.error?.code;
+    throw fallo;
+  }
+  return cuerpo;
+}
+
+async function enviar(evento) {
   evento.preventDefault();
   const b = barberoActual();
   const servicio = servicioActual();
@@ -263,7 +284,7 @@ function enviar(evento) {
     el.horas.querySelector('input:not(:disabled)')?.focus();
     return;
   }
-  if (!nombre) {
+  if (nombre.length < 2) {
     mostrarError('Escribe tu nombre para que el barbero sepa a quién esperar.');
     el.campoNombre.setAttribute('aria-invalid', 'true');
     el.campoNombre.focus();
@@ -271,40 +292,62 @@ function enviar(evento) {
   }
   mostrarError('');
   const inicio = new Date(estado.hora);
+  estado.clave ??= crypto.randomUUID();
+  el.enviar.disabled = true;
+  el.enviar.textContent = 'Reservando…';
+  let resultado;
+  try {
+    resultado = await guardarCita({
+      barbero: b.id,
+      servicio: servicio.id,
+      inicio: estado.hora,
+      nombre,
+    });
+  } catch (e) {
+    mostrarError(
+      e.code === 'HORA_OCUPADA' || e.code === 'HORA_NO_DISPONIBLE'
+        ? 'Esa hora se acaba de ocupar. Elige otra, por favor.'
+        : `${e.message} Si sigue fallando, escríbenos por WhatsApp.`,
+    );
+    if (e.code === 'HORA_OCUPADA' || e.code === 'HORA_NO_DISPONIBLE') {
+      estado.hora = null;
+      estado.clave = null;
+      estado.alCambiarAgenda();
+    }
+    return;
+  } finally {
+    el.enviar.disabled = false;
+    el.enviar.textContent = 'Reservar cita';
+  }
+
   const cuando = `${fechaLarga(estado.fecha)} a las ${formatearHora(inicio)}`;
+  // Aviso opcional por WhatsApp: solo los datos de la cita, sin enlaces al calendario
   const mensaje = [
-    `Hola, ${MARCA.nombre}. Soy ${nombre} y quiero reservar:`,
+    `Hola, ${MARCA.nombre}. Soy ${nombre} y reservé en la página:`,
     `• Barbero: ${nombreBarbero(b)} (silla ${b.silla})`,
     `• Servicio: ${servicio.nombre} (${servicio.minutos} min, ${formatearCop(servicio.precio)})`,
     `• Día: ${cuando}`,
-    '¿Me confirman, por favor?',
-    '',
-    // La barbería toca este enlace, guarda el evento y esa hora queda ocupada en la página
-    `Para la barbería, apartar en el calendario de ${b.nombre}: ${enlaceCalendario(
-      inicio,
-      servicio,
-      {
-        titulo: `${servicio.nombre} · ${nombre}`,
-        detalles: `Reserva desde la página web. Cliente: ${nombre}. Silla ${b.silla}.`,
-      },
-    )}`,
   ].join('\n');
-  const whatsapp = enlaceWhatsapp(mensaje);
-  window.open(whatsapp, '_blank', 'noopener');
-
   el.resumen.textContent = `${servicio.nombre} con ${nombreBarbero(b)}, ${cuando}.`;
-  el.whatsapp.href = whatsapp;
-  // Sin el nombre: este enlace es para el calendario personal del cliente
+  el.listoDetalle.textContent = resultado.demo
+    ? 'Modo demostración: la cita no se guardó en ningún calendario.'
+    : 'Ya quedó en la agenda del barbero. Si no puedes llegar, avísanos por WhatsApp para liberar la silla.';
+  el.whatsapp.href = enlaceWhatsapp(mensaje);
+  // Para el calendario personal del cliente (sin su nombre)
   el.calendario.href = enlaceCalendario(inicio, servicio, {
     titulo: `${servicio.nombre} en ${MARCA.nombre}`,
-    detalles: `Con ${nombreBarbero(b)}, silla ${b.silla}. Cita sujeta a confirmación por WhatsApp.`,
+    detalles: `Con ${nombreBarbero(b)}, silla ${b.silla}. ${MARCA.direccion}, ${MARCA.ciudad}.`,
   });
+  estado.clave = null;
+  estado.hora = null;
   el.form.hidden = true;
   el.listo.hidden = false;
   el.listo.focus();
+  estado.alCambiarAgenda();
 }
 
-export function iniciarReserva() {
+export function iniciarReserva({ alCambiarAgenda } = {}) {
+  if (alCambiarAgenda) estado.alCambiarAgenda = alCambiarAgenda;
   el.form.addEventListener('change', (e) => {
     const { name, value } = e.target;
     if (name === 'servicio') {
@@ -316,6 +359,7 @@ export function iniciarReserva() {
       pintarHoras();
     } else if (name === 'hora') {
       estado.hora = value;
+      estado.clave = null;
       mostrarError('');
     }
   });

@@ -4,6 +4,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, normalize, resolve } from 'node:path';
 import { GET as disponibilidad } from '../api/disponibilidad.js';
+import { POST as reservas } from '../api/reservas.js';
 
 const RAIZ = resolve(import.meta.dirname, '..');
 const PUERTO = Number(process.env.PORT ?? 5180);
@@ -22,8 +23,23 @@ const PRIVADOS = /^[\\/](api|scripts|node_modules|\.git|\.env)/;
 createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PUERTO}`);
   try {
-    if (url.pathname === '/api/disponibilidad') {
-      const r = await disponibilidad(new Request(url));
+    const rutas = { 'GET /api/disponibilidad': disponibilidad, 'POST /api/reservas': reservas };
+    const funcion = rutas[`${req.method} ${url.pathname}`];
+    if (url.pathname.startsWith('/api/') && !funcion) {
+      res.writeHead(405);
+      res.end();
+      return;
+    }
+    if (funcion) {
+      const partes = [];
+      for await (const parte of req) partes.push(parte);
+      const r = await funcion(
+        new Request(url, {
+          method: req.method,
+          headers: req.headers,
+          body: req.method === 'GET' ? undefined : Buffer.concat(partes),
+        }),
+      );
       res.writeHead(r.status, Object.fromEntries(r.headers));
       res.end(Buffer.from(await r.arrayBuffer()));
       return;
@@ -44,7 +60,7 @@ createServer(async (req, res) => {
   }
 }).listen(PUERTO, () => {
   console.log(`Barber Mafia en http://localhost:${PUERTO}`);
-  if (!process.env.GOOGLE_CALENDAR_API_KEY) {
-    console.log('Aviso: sin GOOGLE_CALENDAR_API_KEY en .env, la agenda saldrá "no disponible".');
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON && !process.env.GOOGLE_CALENDAR_API_KEY) {
+    console.log('Aviso: sin credenciales de Google en .env, la agenda saldrá "no disponible".');
   }
 });

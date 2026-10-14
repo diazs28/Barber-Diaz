@@ -50,3 +50,21 @@ llama a `/api/disponibilidad` en el mismo dominio y recibe los bloques ocupados.
   Google Calendar API.
 - La CDN de Vercel guarda cada respuesta 60 s para no gastar cuota de Google.
 - Para desarrollo local, `npm run dev` levanta la landing y la función con la clave de `.env`.
+
+## Actualización 2026-10-14: reservas guardadas automáticamente
+
+El cliente ya no recibe un enlace para crear el evento: `POST /api/reservas` lo crea directamente en
+el calendario del barbero con una cuenta de servicio de Google (variable
+`GOOGLE_SERVICE_ACCOUNT_JSON`).
+
+- Los calendarios pasan a la cuenta Gmail del negocio (`magiabarber8@gmail.com`, de prueba): la
+  cuenta de la universidad no permite dar permiso de edición a cuentas externas.
+- Cada calendario se comparte con `reservas-web@barber-diaz.iam.gserviceaccount.com` con permiso
+  "Hacer cambios y ver todos los detalles del evento". Solo esa cuenta y los barberos editan.
+- El servidor valida la franja con las mismas reglas de la página (horario, almuerzo, descanso,
+  antelación y duración), consulta la ocupación real sin caché y crea el evento.
+- Doble reserva: tras crear el evento se buscan otros eventos cruzados; si los hay, se retira el
+  propio y se responde 409. `Idempotency-Key` define el ID del evento, así un reintento no duplica.
+- El nombre del cliente queda en el calendario privado del barbero (los calendarios públicos solo
+  muestran libre/ocupado). La página pide aceptación antes de reservar (Ley 1581).
+- Pendiente: límite de peticiones por IP con el Firewall de Vercel para evitar reservas masivas.

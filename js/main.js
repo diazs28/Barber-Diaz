@@ -148,9 +148,9 @@ function pintar(datosNuevos = false) {
   }
 }
 
-async function recargar() {
+async function recargar({ fresco = false } = {}) {
   try {
-    ocupacion = await cargarOcupacion(hoy());
+    ocupacion = await cargarOcupacion(hoy(), undefined, { fresco });
     errorAgenda = false;
   } catch (error) {
     console.error('[agenda] No se pudo cargar la disponibilidad:', error);
@@ -163,7 +163,7 @@ iniciarPlano((id, opciones) => {
   marcarElegido(id);
   elegirBarbero(id, opciones);
 });
-iniciarReserva();
+iniciarReserva({ alCambiarAgenda: () => recargar({ fresco: true }) });
 pintar();
 recargar();
 setInterval(() => pintar(), 60_000);
