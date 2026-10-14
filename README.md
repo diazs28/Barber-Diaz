@@ -1,4 +1,4 @@
-# Barber Mafia — Landing de reservas
+# Magia Barber — Landing de reservas
 
 ## Descripción
 

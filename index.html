@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Barber Mafia | Agenda tu corte en Popayán</title>
+    <title>Magia Barber | Agenda tu corte en Popayán</title>
     <meta
       name="description"
       content="Barbería en el centro de Popayán. Mira en el plano qué barbero está libre y agenda tu corte en minutos."
@@ -12,7 +12,7 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CO" />
-    <meta property="og:title" content="Barber Mafia | Agenda tu corte en Popayán" />
+    <meta property="og:title" content="Magia Barber | Agenda tu corte en Popayán" />
     <meta
       property="og:description"
       content="Elige tu barbero en el plano del local, mira sus horas libres y aparta tu turno sin hacer fila."
@@ -54,7 +54,7 @@
       <div class="bwl-entrada__fondo"></div>
       <div class="bwl-entrada__contenido">
         <span class="bwl-entrada__contador" data-bwl-contador data-desde="2019">2019</span>
-        <p class="bwl-entrada__nombre" data-marca="nombre">Barber Mafia</p>
+        <p class="bwl-entrada__nombre" data-marca="nombre">Magia Barber</p>
         <span class="bwl-entrada__linea"></span>
         <span class="bwl-entrada__lema" data-marca="lema">Barbería · Popayán</span>
       </div>
@@ -67,73 +67,281 @@
 
     <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-    <header class="cabecera">
-      <div class="contenedor cabecera__fila">
-        <a class="marca" href="#inicio">
-          <svg class="marca__poste" viewBox="0 0 14 32" width="11" height="26" aria-hidden="true">
-            <defs>
-              <clipPath id="poste-recorte">
-                <rect x="2" y="4" width="10" height="24" rx="2" />
-              </clipPath>
-            </defs>
-            <g clip-path="url(#poste-recorte)">
-              <rect x="2" y="4" width="10" height="24" fill="#f5f2ec" />
-              <path
-                d="M-2 12 16 2v5L-2 17Zm0 10L16 12v5L-2 27Zm0 10L16 22v5L-2 37Z"
-                fill="#1c3152"
-              />
-            </g>
-            <rect x="0" y="0" width="14" height="5" rx="2.5" fill="#e3d6bd" />
-            <rect x="0" y="27" width="14" height="5" rx="2.5" fill="#e3d6bd" />
-          </svg>
-          <span data-marca="nombre">Barber Mafia</span>
-        </a>
-        <button
-          class="menu-boton"
-          type="button"
-          aria-expanded="false"
-          aria-controls="menu"
-          data-menu-boton
-        >
-          <span class="sr-only">Abrir menú</span>
-          <span class="menu-boton__icono" aria-hidden="true"></span>
-        </button>
-        <nav id="menu" class="menu" aria-label="Principal" data-menu>
-          <a href="#inicio">Inicio</a>
-          <a href="#agenda">Agenda tu silla</a>
-          <a href="#contacto">Contacto</a>
-        </nav>
-      </div>
-    </header>
-
     <main id="contenido">
-      <!-- 1. Inicio -->
+      <!-- 1. Inicio: escena del barbero con órbitas que giran -->
       <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+        <div class="hero__fondo" aria-hidden="true"></div>
         <div class="contenedor hero__rejilla">
-          <h1 class="hero__titulo" id="hero-titulo" data-titulo-marca>
-            <span class="hero__mascara"><span class="hero__linea">Barber</span></span>
-            <span class="hero__mascara"><span class="hero__linea">Mafia</span></span>
-          </h1>
-          <div class="hero__resto" data-anim="hero-resto">
-            <p class="ahora" data-ahora data-estado="cargando" aria-live="polite">
+          <div class="hero__texto-col">
+            <h1 class="hero__titulo" id="hero-titulo" data-titulo-marca>
+              <span class="hero__mascara"><span class="hero__linea">Magia</span></span>
+              <span class="hero__mascara"><span class="hero__linea">Barber</span></span>
+            </h1>
+            <div class="hero__resto" data-anim="hero-resto">
+              <p class="hero__eslogan" data-marca="eslogan"></p>
+              <p class="hero__texto" data-marca="presentacion"></p>
+              <div class="hero__acciones">
+                <a class="boton" href="#agenda">Agenda tu silla</a>
+                <a
+                  class="boton boton--borde"
+                  data-enlace="whatsapp"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Escríbenos por WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <figure class="escena">
+            <svg
+              class="escena__dibujo"
+              viewBox="0 0 460 520"
+              role="img"
+              aria-labelledby="escena-titulo"
+            >
+              <title id="escena-titulo">
+                Ilustración de un barbero cortando el pelo a un cliente sentado en la silla
+              </title>
+              <defs>
+                <linearGradient id="esc-camisa" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#3b62a0" />
+                  <stop offset="1" stop-color="#1c3152" />
+                </linearGradient>
+                <linearGradient id="esc-delantal" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#f4ede0" />
+                  <stop offset="1" stop-color="#c9b48c" />
+                </linearGradient>
+                <linearGradient id="esc-capa" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#f7f5f0" />
+                  <stop offset="1" stop-color="#b9c4d6" />
+                </linearGradient>
+                <linearGradient id="esc-cuero" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#4069a8" />
+                  <stop offset="1" stop-color="#21406e" />
+                </linearGradient>
+                <linearGradient id="esc-cromo" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#7d8aa0" />
+                  <stop offset="0.5" stop-color="#e3e9f2" />
+                  <stop offset="1" stop-color="#7d8aa0" />
+                </linearGradient>
+                <radialGradient id="esc-halo">
+                  <stop offset="0" stop-color="#bcd4ff" stop-opacity="0.95" />
+                  <stop offset="1" stop-color="#bcd4ff" stop-opacity="0" />
+                </radialGradient>
+                <filter id="esc-brillo" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3.5" />
+                </filter>
+              </defs>
+
+              <!-- Órbitas de fondo: giran sobre sí mismas -->
+              <g class="escena__orbitas">
+                <circle class="orbita orbita--a" cx="230" cy="250" r="208" />
+                <circle class="orbita orbita--b" cx="230" cy="250" r="168" />
+                <circle class="orbita orbita--poste" cx="230" cy="250" r="228" />
+                <g class="orbita__satelite">
+                  <circle cx="438" cy="250" r="9" fill="url(#esc-halo)" />
+                  <circle cx="438" cy="250" r="3" fill="#eef4ff" />
+                </g>
+              </g>
+              <ellipse cx="236" cy="462" rx="178" ry="16" fill="#8fb8ff" opacity="0.1" />
+
+              <!-- Silla de barbero (vista lateral) -->
+              <g class="escena__silla">
+                <ellipse cx="282" cy="458" rx="54" ry="9" fill="url(#esc-cromo)" />
+                <rect x="270" y="392" width="24" height="66" rx="6" fill="url(#esc-cromo)" />
+                <rect x="258" y="382" width="48" height="14" rx="7" fill="#162a49" />
+                <path
+                  d="M342 388 L372 438"
+                  stroke="url(#esc-cromo)"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                />
+                <rect x="352" y="434" width="46" height="8" rx="4" fill="url(#esc-cromo)" />
+                <g transform="rotate(-7 240 300)">
+                  <rect
+                    x="208"
+                    y="226"
+                    width="40"
+                    height="140"
+                    rx="15"
+                    fill="url(#esc-cuero)"
+                    stroke="#9ec2ff"
+                    stroke-opacity="0.55"
+                    stroke-width="1.5"
+                  />
+                  <rect
+                    x="212"
+                    y="198"
+                    width="32"
+                    height="24"
+                    rx="9"
+                    fill="#2a4a7c"
+                    stroke="#9ec2ff"
+                    stroke-opacity="0.55"
+                    stroke-width="1.5"
+                  />
+                </g>
+                <rect
+                  x="230"
+                  y="352"
+                  width="114"
+                  height="34"
+                  rx="13"
+                  fill="url(#esc-cuero)"
+                  stroke="#9ec2ff"
+                  stroke-opacity="0.55"
+                  stroke-width="1.5"
+                />
+              </g>
+
+              <!-- Cliente con capa -->
+              <g class="escena__cliente" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M318 380 L372 386 L378 438"
+                  fill="none"
+                  stroke="#34548a"
+                  stroke-width="24"
+                />
+                <path d="M378 440 L404 442" fill="none" stroke="#f5f2ec" stroke-width="11" />
+                <path
+                  d="M246 214 Q 312 220 328 300 L 338 372 L 232 372 Q 222 300 246 214 Z"
+                  fill="url(#esc-capa)"
+                />
+                <path
+                  d="M262 236 L 296 370 M286 230 L 320 370"
+                  stroke="#a7b3c8"
+                  stroke-width="1.2"
+                  opacity="0.5"
+                />
+                <rect x="296" y="338" width="58" height="9" rx="4.5" fill="url(#esc-cromo)" />
+                 rx="6" fill="#d7dde8" />
+                <path d="M262 206 L263 196" stroke="#e8b48f" stroke-width="14" />
+                <circle cx="264" cy="174" r="27" fill="#f0c2a2" />
+                <path d="M288 170 Q 296 178 289 186" fill="#f0c2a2" />
+                <path
+                  d="M238 172 Q 238 142 266 145 Q 290 147 292 162 Q 274 155 258 160 Q 246 165 244 186 Z"
+                  fill="#182437"
+                />
+                <circle cx="255" cy="178" r="5" fill="#e3a987" />
+              </g>
+              <!-- Pelo que cae al cortar -->
+              <g class="escena__pelos" stroke="#182437" stroke-width="2" stroke-linecap="round">
+                <path d="M258 152 l3 6" />
+                <path d="M268 150 l-2 6" />
+                <path d="M276 154 l3 5" />
+                <path d="M264 156 l1 6" />
+                <path d="M272 158 l-3 5" />
+              </g>
+
+              <!-- Barbero -->
+              <g
+                class="escena__barbero escena__vaiven"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="none"
+              >
+                <path d="M152 298 L140 378 L136 450" stroke="#2a4670" stroke-width="28" />
+                <path d="M134 452 L160 454" stroke="#f5f2ec" stroke-width="11" />
+                <path d="M164 298 L184 378 L190 450" stroke="#34548a" stroke-width="28" />
+                <path d="M190 452 L216 454" stroke="#f5f2ec" stroke-width="11" />
+                <path d="M152 168 Q 146 236 158 300" stroke="url(#esc-camisa)" stroke-width="56" />
+                <path
+                  d="M134 212 L178 206 L188 304 L132 306 Z"
+                  fill="url(#esc-delantal)"
+                  stroke="none"
+                />
+                <path d="M144 250 L170 248" stroke="#b9a682" stroke-width="2" />
+                <!-- Brazo con peinilla -->
+                <path d="M156 184 L178 216" stroke="url(#esc-camisa)" stroke-width="22" />
+                <path d="M178 216 L190 226 L230 198" stroke="#f0c2a2" stroke-width="15" />
+                <rect
+                  x="228"
+                  y="184"
+                  width="6"
+                  height="24"
+                  rx="2"
+                  fill="#e3d6bd"
+                  stroke="none"
+                  transform="rotate(20 231 196)"
+                />
+                <!-- Brazo con tijeras -->
+                <path d="M162 174 L188 160" stroke="url(#esc-camisa)" stroke-width="22" />
+                <path d="M188 160 L206 150 L242 144" stroke="#f0c2a2" stroke-width="15" />
+                <!-- Columna iluminada -->
+                <path class="escena__columna" d="M152 152 Q 148 230 158 296" />
+                <!-- Cuello, cabeza, pelo y barba -->
+                <path d="M154 148 L155 136" stroke="#e8b48f" stroke-width="16" />
+                <circle cx="158" cy="114" r="25" fill="#f0c2a2" stroke="none" />
+                <path
+                  d="M134 112 Q 134 84 160 86 Q 182 88 184 104 Q 166 98 150 102 Q 140 106 138 122 Z"
+                  fill="#101a2b"
+                  stroke="none"
+                />
+                <path
+                  d="M152 128 Q 166 144 182 124 Q 180 134 168 140 Q 156 142 152 128 Z"
+                  fill="#101a2b"
+                  stroke="none"
+                />
+              </g>
+
+              <!-- Tijeras: las hojas se abren y cierran -->
+              <g class="escena__vaiven">
+                <g transform="translate(246 142)">
+                  <g class="tijera tijera--a">
+                    <path
+                      d="M0 0 L26 -5"
+                      stroke="url(#esc-cromo)"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="-6" cy="-3" r="4" fill="none" stroke="#c9d3e0" stroke-width="2" />
+                  </g>
+                  <g class="tijera tijera--b">
+                    <path
+                      d="M0 0 L26 5"
+                      stroke="url(#esc-cromo)"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="-6" cy="3" r="4" fill="none" stroke="#c9d3e0" stroke-width="2" />
+                  </g>
+                </g>
+              </g>
+
+              <!-- Energía que recorre el brazo hasta las tijeras -->
+              <path class="escena__flujo escena__vaiven" d="M154 150 L188 160 L206 150 L246 142" />
+
+              <!-- Puntos de luz -->
+              <g class="escena__nodos">
+                <circle class="pulso" cx="258" cy="142" r="14" />
+                <circle class="pulso" cx="231" cy="196" r="12" />
+                <circle class="pulso" cx="206" cy="150" r="11" />
+                <circle class="pulso" cx="264" cy="148" r="11" />
+                <circle class="pulso" cx="184" cy="378" r="10" />
+                <circle class="pulso" cx="282" cy="392" r="10" />
+                <circle class="nodo" cx="258" cy="142" r="3.5" />
+                <circle class="nodo" cx="231" cy="196" r="3" />
+                <circle class="nodo" cx="206" cy="150" r="3" />
+                <circle class="nodo" cx="162" cy="174" r="3" />
+                <circle class="nodo" cx="184" cy="378" r="3" />
+                <circle class="nodo" cx="282" cy="392" r="3" />
+              </g>
+            </svg>
+
+            <p
+              class="escena__dato escena__dato--a"
+              data-ahora
+              data-estado="cargando"
+              aria-live="polite"
+            >
               <span class="ahora__punto" aria-hidden="true"></span>
               <span data-ahora-texto>Consultando las sillas…</span>
             </p>
-            <p class="hero__eslogan" data-marca="eslogan"></p>
-            <p class="hero__texto" data-marca="presentacion"></p>
-            <div class="hero__acciones">
-              <a class="boton" href="#agenda">Agenda tu silla</a>
-              <a
-                class="boton boton--borde"
-                data-enlace="whatsapp"
-                href="#"
-                target="_blank"
-                rel="noopener"
-              >
-                Escríbenos por WhatsApp
-              </a>
-            </div>
-          </div>
+            <p class="escena__dato escena__dato--b"><b>3</b> barberos con agenda en vivo</p>
+          </figure>
         </div>
       </section>
 
@@ -170,7 +378,7 @@
                 role="img"
                 aria-labelledby="plano-titulo plano-desc"
               >
-                <title id="plano-titulo">Plano del local de Barber Mafia</title>
+                <title id="plano-titulo">Plano del local de Magia Barber</title>
                 <desc id="plano-desc">
                   Vista desde arriba. La entrada da a la calle. A la izquierda de la entrada está la
                   silla 2 y a la derecha la silla 3; la silla 1 queda debajo de la silla 2. La sala
@@ -601,7 +809,7 @@
       <div class="contenedor">
         <div class="pie__rejilla">
           <div class="pie__marca">
-            <p class="pie__nombre" data-marca="nombre">Barber Mafia</p>
+            <p class="pie__nombre" data-marca="nombre">Magia Barber</p>
             <p data-marca="eslogan"></p>
           </div>
           <div>
