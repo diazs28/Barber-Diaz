@@ -1,6 +1,6 @@
 // Panel de reserva: barbero elegido → servicio → día → hora → nombre → mensaje de WhatsApp.
 // No se guarda ningún dato en la página: la cita la confirma la barbería por WhatsApp.
-import { AGENDA, BARBEROS, MARCA, SERVICIOS, enlaceWhatsapp } from './config.js';
+import { AGENDA, BARBEROS, MARCA, SERVICIOS, enlaceWhatsapp, nombreBarbero } from './config.js';
 import { horariosDelDia, jornada } from './disponibilidad.js';
 import { formatearCop } from './formato.js';
 import { detalleEstado } from './plano.js';
@@ -182,7 +182,7 @@ function mostrarAvisoHoras(texto) {
 function pintarCabecera() {
   const b = barberoActual();
   el.inicial.textContent = b.nombre.charAt(0);
-  el.nombre.textContent = `${b.nombre} “${b.apodo}”`;
+  el.nombre.textContent = nombreBarbero(b);
   el.detalle.textContent = `Silla ${b.silla} · ${b.especialidad}`;
   const e = estado.estados?.get(b.id);
   el.estado.textContent = estado.error ? 'Agenda no disponible' : detalleEstado(e);
@@ -274,7 +274,7 @@ function enviar(evento) {
   const cuando = `${fechaLarga(estado.fecha)} a las ${formatearHora(inicio)}`;
   const mensaje = [
     `Hola, ${MARCA.nombre}. Soy ${nombre} y quiero reservar:`,
-    `• Barbero: ${b.nombre} “${b.apodo}” (silla ${b.silla})`,
+    `• Barbero: ${nombreBarbero(b)} (silla ${b.silla})`,
     `• Servicio: ${servicio.nombre} (${servicio.minutos} min, ${formatearCop(servicio.precio)})`,
     `• Día: ${cuando}`,
     '¿Me confirman, por favor?',
@@ -292,12 +292,12 @@ function enviar(evento) {
   const whatsapp = enlaceWhatsapp(mensaje);
   window.open(whatsapp, '_blank', 'noopener');
 
-  el.resumen.textContent = `${servicio.nombre} con ${b.nombre} “${b.apodo}”, ${cuando}.`;
+  el.resumen.textContent = `${servicio.nombre} con ${nombreBarbero(b)}, ${cuando}.`;
   el.whatsapp.href = whatsapp;
   // Sin el nombre: este enlace es para el calendario personal del cliente
   el.calendario.href = enlaceCalendario(inicio, servicio, {
     titulo: `${servicio.nombre} en ${MARCA.nombre}`,
-    detalles: `Con ${b.nombre} “${b.apodo}”, silla ${b.silla}. Cita sujeta a confirmación por WhatsApp.`,
+    detalles: `Con ${nombreBarbero(b)}, silla ${b.silla}. Cita sujeta a confirmación por WhatsApp.`,
   });
   el.form.hidden = true;
   el.listo.hidden = false;
