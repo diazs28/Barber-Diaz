@@ -1,0 +1,12 @@
+# Cabeceras para Cloudflare Pages / Netlify.
+# connect-src incluye www.googleapis.com para leer la disponibilidad con AGENDA.fuente = 'google'.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), usb=()
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
