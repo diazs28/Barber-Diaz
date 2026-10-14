@@ -66,7 +66,7 @@ export function pintarPlano(estados, error) {
     const detalle = (error ? ESTADO_CORTO.error : detalleEstado(estado, ahora)).replace(/\.$/, '');
     boton.setAttribute(
       'aria-label',
-      `Silla ${b.silla}, ${b.nombre} “${b.apodo}”. ${detalle}. Ver horarios y reservar`,
+      `${b.silla} ${b.nombre} “${b.apodo}”, silla ${b.silla}: ${detalle}. Ver horarios y reservar`,
     );
   });
 }

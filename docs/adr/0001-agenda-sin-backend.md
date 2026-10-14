@@ -30,7 +30,11 @@ vivir en el navegador. Sin servidor tampoco hay forma de bloquear un turno de ma
 - Dos clientes pueden pedir la misma hora antes de que la barbería la marque en el calendario. La
   barbería lo resuelve al confirmar por WhatsApp. El texto de la página dice que el turno queda
   apartado cuando la barbería responde.
-- La barbería debe pasar cada cita confirmada a Google Calendar (desde el celular toma segundos).
+- La barbería pasa cada cita confirmada a Google Calendar. Para que sea un solo toque, el mensaje
+  de WhatsApp trae un enlace de plantilla de evento con el servicio, el nombre, la hora y la
+  duración: se abre, se elige el calendario del barbero y se guarda. Los clientes sin cita, los
+  descansos y las vacaciones se marcan creando eventos en ese mismo calendario. No hace falta un
+  panel de administrador.
 - **Fase 2 propuesta:** un backend pequeño (Express 5 + Zod) con una cuenta de servicio de Google que
   cree el evento al reservar, con bloqueo de la franja, `Idempotency-Key` y recordatorios automáticos.
   Así se elimina la doble reserva y el paso manual.
