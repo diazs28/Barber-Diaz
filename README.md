@@ -4,8 +4,8 @@
 
 Landing de una barbería en Popayán con tres secciones:
 
-1. **Inicio:** nombre, propuesta, cuántas sillas están libres en este momento, dirección, horario y
-   carta de servicios con precios.
+1. **Inicio:** nombre, propuesta, cuántas sillas están libres en este momento y accesos a la
+   agenda y a WhatsApp. Es corto a propósito para que la agenda quede casi a la vista.
 2. **Agenda tu silla:** plano 2D del local visto desde arriba (entrada, tres puestos con silla,
    espejo y tocador, sala de espera, baño y vitrina con caja). Cada puesto muestra qué barbero
    atiende y su estado en vivo:
@@ -14,11 +14,13 @@ Landing de una barbería en Popayán con tres secciones:
    - **Fuera de turno:** sin barbero en el puesto.
 
    Al tocar un puesto se abre la tarjeta de reserva: servicio, día (próximos 7), hora libre y
-   nombre. La reserva sale por WhatsApp ya escrita y se puede añadir a Google Calendar.
+   nombre. La reserva sale por WhatsApp ya escrita, con un enlace para que la barbería la aparte en
+   Google Calendar con un toque. El cliente también puede añadirla a su propio calendario.
 
 3. **Pie de página:** WhatsApp, correo, redes, dirección con "Cómo llegar" y horario.
 
-Incluye el preloader sello BWL & SOFT ("ola difuminada") en latón y sangre de buey.
+Colores: azul oscuro de noche, blanco y hueso. Incluye el preloader sello BWL & SOFT ("ola
+difuminada") con una ola blanca y hueso sobre azul.
 
 ## Supuestos (validar con el cliente)
 
@@ -72,13 +74,34 @@ dominio y a Calendar API. No pongas ahí claves de cuentas de servicio ni secret
 
 ## Conectar Google Calendar
 
-1. Cada barbero crea (o usa) un Google Calendar donde la barbería anota sus citas.
+Se configura una sola vez:
+
+1. Con la cuenta de Google de la barbería, crea un calendario por barbero (_Silla 1 · Andrés_,
+   _Silla 2 · Camilo_, _Silla 3 · Julián_) y compártelo con cada barbero con permiso **Hacer cambios
+   en eventos**. Así cada uno lo maneja desde la app Google Calendar de su celular.
 2. En la configuración de cada calendario: _Permisos de acceso_ → _Hacer público_ → **Ver solo
    libre/ocupado (ocultar detalles)**. Copia el **ID del calendario** (en _Integrar el calendario_).
 3. En Google Cloud Console: crea un proyecto, habilita **Google Calendar API** y crea una
    **clave de API**. Restríngela a _Sitios web_ (el dominio de la landing) y a _Google Calendar API_.
 4. En `js/config.js`: `AGENDA.fuente = 'google'`, `AGENDA.googleApiKey = '<clave>'` y
    `calendarioId` en cada barbero.
+
+### Cómo marca el barbero una hora ocupada (sin panel de administrador)
+
+El panel es la app **Google Calendar** del celular. Cualquier evento en el calendario de un barbero
+ocupa esa franja en la página. No importa el título y nadie más ve los detalles.
+
+| Situación                           | Qué hace el barbero en Google Calendar                                                                                                | Qué pasa en la página                                    |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Llega una reserva por WhatsApp      | Toca el enlace _"Para la barbería, apartar en el calendario de…"_ que trae el mensaje, revisa que esté elegido su calendario y guarda | Esa hora deja de aparecer libre                          |
+| Cliente sin cita (llega al local)   | Crea un evento ahora, por la duración del corte                                                                                       | Su silla pasa a "Atendiendo", con el cliente en el plano |
+| Cita por teléfono o en persona      | Crea el evento en el día y la hora                                                                                                    | Hora ocupada                                             |
+| Día libre, vacaciones o incapacidad | Evento de **todo el día** (o de varios días)                                                                                          | Ese día sale lleno                                       |
+| Sale antes o llega tarde            | Evento que cubra esas horas                                                                                                           | Esas horas ocupadas                                      |
+| Cancelan una cita                   | Borra el evento                                                                                                                       | La hora vuelve a quedar libre                            |
+
+Los eventos marcados como **Disponible** (en vez de _Ocupado_) no bloquean. La página vuelve a leer
+el calendario cada 5 minutos y cada vez que alguien la abre.
 
 La página lee los bloques ocupados de los próximos 7 días, los vuelve a leer cada 5 minutos y
 calcula las horas libres con el horario del local, los descansos y los almuerzos. Si Google no
@@ -140,7 +163,8 @@ y Netlify se aplican las cabeceras de `_headers`. Si se activa Google Calendar, 
 ## Seguridad
 
 - CSP estricta sin `unsafe-inline`: no hay scripts ni estilos en línea.
-- La página no guarda datos personales: el nombre del cliente solo va en el mensaje de WhatsApp que
-  él mismo envía (Ley 1581). El enlace de Google Calendar no incluye el nombre.
+- La página no guarda datos personales (Ley 1581). El nombre del cliente solo viaja en el mensaje
+  de WhatsApp que él mismo envía; el enlace para la barbería lo lleva al título del evento en su
+  calendario privado. El enlace "Añadir a Google Calendar" del cliente no incluye el nombre.
 - Los precios son informativos; no hay pagos en línea.
 - La única clave posible (`googleApiKey`) es de navegador, restringida por dominio y por API.
