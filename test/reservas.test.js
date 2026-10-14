@@ -29,6 +29,9 @@ function simularGoogle({ ocupados = [], crear = 200, cruzados = [], propioExiste
     const json = (status, cuerpo) =>
       new Response(cuerpo === null ? null : JSON.stringify(cuerpo), { status });
     if (u.startsWith('https://oauth2.googleapis.com/token')) {
+      // Guarda los permisos que pidió el token (parte central del JWT)
+      const jwt = new URLSearchParams(opciones.body).get('assertion');
+      google.alcance = JSON.parse(Buffer.from(jwt.split('.')[1], 'base64url').toString()).scope;
       return json(200, { access_token: 'token-falso', expires_in: 3600 });
     }
     if (u.endsWith('/freeBusy')) {
@@ -97,6 +100,14 @@ describe('reservar()', () => {
     assert.equal(google.evento.start.dateTime, a('10:00').toISOString());
     assert.equal(google.evento.end.dateTime, a('10:45').toISOString());
     assert.match(google.evento.id, /^bm[0-9a-f]{40}$/);
+  });
+
+  test('el token pide permiso de eventos y de libre/ocupado (sin este, Google responde 403)', async () => {
+    simularGoogle();
+    await reservar(pedido(), { ahora: AHORA });
+    const permisos = google.alcance.split(' ');
+    assert.ok(permisos.includes('https://www.googleapis.com/auth/calendar.events'));
+    assert.ok(permisos.includes('https://www.googleapis.com/auth/calendar.freebusy'));
   });
 
   test('rechaza una hora fuera del horario (422)', async () => {
