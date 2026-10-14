@@ -59,7 +59,7 @@ el calendario del barbero con una cuenta de servicio de Google (variable
 
 - Los calendarios pasan a la cuenta Gmail del negocio (`magiabarber8@gmail.com`, de prueba): la
   cuenta de la universidad no permite dar permiso de edición a cuentas externas.
-- Cada calendario se comparte con `reservas-web@barber-diaz.iam.gserviceaccount.com` con permiso
+- Cada calendario se comparte con `reservas-web@magiabarber.iam.gserviceaccount.com` con permiso
   "Hacer cambios y ver todos los detalles del evento". Solo esa cuenta y los barberos editan.
 - El servidor valida la franja con las mismas reglas de la página (horario, almuerzo, descanso,
   antelación y duración), consulta la ocupación real sin caché y crea el evento.
