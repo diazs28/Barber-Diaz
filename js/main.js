@@ -1,16 +1,14 @@
-// Arranque: datos de marca, menú móvil, horario, carta de servicios y agenda (plano + reserva).
+// Arranque: datos de marca, menú móvil, horario del pie y agenda (plano + reserva).
 import {
   AGENDA,
   BARBEROS,
   HORARIO_LOCAL,
   MARCA,
-  SERVICIOS,
   enlaceMapa,
   enlaceWhatsapp,
   telefonoVisible,
 } from './config.js';
 import { cargarOcupacion, estadoAhora } from './disponibilidad.js';
-import { formatearCop } from './formato.js';
 import { iniciarPlano, marcarElegido, pintarPlano, resumenAhora } from './plano.js';
 import { actualizarReserva, elegirBarbero, iniciarReserva } from './reserva.js';
 import { hoy, instante, formatearHora } from './tiempo.js';
@@ -69,7 +67,7 @@ if (contador) {
 const sello = document.querySelector('[data-marca="creditoDesarrollo"]');
 if (sello && !MARCA.creditoDesarrollo) sello.remove();
 
-document.title = `${MARCA.nombre} | Agenda tu corte en Popayán`;
+document.title = `${MARCA.nombre} | Agenda tu corte en ${MARCA.ciudad}`;
 
 // 2. Menú móvil accesible
 const boton = document.querySelector('[data-menu-boton]');
@@ -130,24 +128,7 @@ document.querySelectorAll('[data-horario]').forEach((lista) => {
   );
 });
 
-// 5. Carta de servicios del inicio
-const carta = document.querySelector('[data-carta]');
-if (carta) {
-  carta.replaceChildren(
-    ...SERVICIOS.map((s) => {
-      const li = document.createElement('li');
-      li.className = 'carta__item';
-      li.innerHTML =
-        '<span class="carta__nombre"></span><span class="carta__puntos" aria-hidden="true"></span><span class="carta__precio"></span><span class="carta__tiempo"></span>';
-      li.querySelector('.carta__nombre').textContent = s.nombre;
-      li.querySelector('.carta__precio').textContent = formatearCop(s.precio);
-      li.querySelector('.carta__tiempo').textContent = `${s.minutos} min`;
-      return li;
-    }),
-  );
-}
-
-// 6. Agenda: plano + panel de reserva + resumen del inicio
+// 5. Agenda: plano + panel de reserva + resumen del inicio
 const ahoraMismo = document.querySelector('[data-ahora]');
 let ocupacion = null;
 let errorAgenda = false;
@@ -162,7 +143,8 @@ function pintar(datosNuevos = false) {
   if (ahoraMismo) {
     const resumen = resumenAhora(estados, errorAgenda);
     ahoraMismo.dataset.estado = resumen.tipo;
-    ahoraMismo.querySelector('[data-ahora-texto]').textContent = resumen.texto;
+    const texto = ahoraMismo.querySelector('[data-ahora-texto]');
+    if (texto.textContent !== resumen.texto) texto.textContent = resumen.texto;
   }
 }
 
