@@ -1,0 +1,20 @@
+{
+  "name": "barber-mafia",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env scripts/servidor-local.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "prettier --check . && node --check api/disponibilidad.js && node --check scripts/servidor-local.mjs"
+  },
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

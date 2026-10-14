@@ -38,3 +38,15 @@ vivir en el navegador. Sin servidor tampoco hay forma de bloquear un turno de ma
 - **Fase 2 propuesta:** un backend pequeño (Express 5 + Zod) con una cuenta de servicio de Google que
   cree el evento al reservar, con bloqueo de la franja, `Idempotency-Key` y recordatorios automáticos.
   Así se elimina la doble reserva y el paso manual.
+
+## Actualización 2026-10-14: la clave pasa al servidor
+
+Para que la clave de Google no quede visible en la página, la lectura de disponibilidad se hace en
+una función serverless de Vercel (`api/disponibilidad.js`). La clave está en la variable de entorno
+`GOOGLE_CALENDAR_API_KEY` y los IDs de los calendarios en `api/_calendarios.js`. El navegador solo
+llama a `/api/disponibilidad` en el mismo dominio y recibe los bloques ocupados.
+
+- La clave ya no puede restringirse por sitio web (el servidor no envía origen). Se restringe solo a
+  Google Calendar API.
+- La CDN de Vercel guarda cada respuesta 60 s para no gastar cuota de Google.
+- Para desarrollo local, `npm run dev` levanta la landing y la función con la clave de `.env`.
